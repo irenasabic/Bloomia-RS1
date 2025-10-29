@@ -1,0 +1,51 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Bloomia.Application.Modules.Auth.Commands.Register
+{
+    public sealed class UserRegisterCommandHandler(IAppDbContext db, IJwtTokenService jwt, IPasswordHasher<UserEntity> hasher)
+        : IRequestHandler<UserRegisterCommand, UserRegisterCommandDto>
+    {
+        //hendlamo registraciju usera obicnog klijenta
+        //mi mu ovdje dodjeljujemo ulogu CLIENT je je endpoint register-as-client
+        public async Task<UserRegisterCommandDto> Handle(UserRegisterCommand request, CancellationToken cancellationToken)
+        {
+            //provjera da li postoji user vec sa istim emailom 
+            //preuzimam poslane atribute
+            //registrujem novog usera
+            //token za njega i refresh token
+
+            var email = request.Email.Trim().ToLower();
+            var user = await db.Users.FirstOrDefaultAsync(x => x.Email.ToLower() == email &&
+                        x.IsEnabled == true && !x.IsDeleted, cancellationToken);//pronadji usera ili null
+
+            if(user != null)
+            {
+                //ako postoji baci exception
+                throw new MarketConflictException("Korisnik sa unesenim emailom već postoji.");
+            }
+
+            //uzmi rolu client iz baze
+            var clientRole = db.Roles.FirstOrDefault(x => x.RoleName == "CLIENT");
+
+            //saad trebamo kreirati token za usera
+
+            //u suprotnom kreiramo novog usera
+            var newUser=new UserEntity
+            {
+                Firstname=request.Firstname,
+                Lastname=request.Lastname,
+                Username=request.Username,
+                Email=request.Email,
+                RoleId=clientRole.Id,
+                Role=clientRole
+                             
+                //dodjela role 
+
+            }
+        }
+    }
+}

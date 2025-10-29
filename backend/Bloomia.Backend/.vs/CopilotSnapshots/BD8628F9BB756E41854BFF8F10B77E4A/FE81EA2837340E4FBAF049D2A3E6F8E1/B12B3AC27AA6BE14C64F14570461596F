@@ -1,0 +1,91 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using System.Threading;
+
+namespace Bloomia.Application.Modules.Auth.Commands.Register
+{
+    public sealed class UserRegisterCommandHandler(IAppDbContext db, IJwtTokenService jwt, IPasswordHasher<UserEntity> hasher)
+        : IRequestHandler<UserRegisterCommand, UserRegisterCommandDto>
+    {
+        //hendlamo registraciju usera obicnog klijenta
+        //mi mu ovdje dodjeljujemo ulogu CLIENT je je endpoint register-as-client
+        public async Task<UserRegisterCommandDto> Handle(UserRegisterCommand request, CancellationToken cancellationToken)
+        {
+            //provjera da li postoji user vec sa istim emailom 
+            //preuzimam poslane atribute
+            //registrujem novog usera
+            //token za njega i refresh token
+
+            var email = request.Email.Trim().ToLower();
+            var user = await db.Users.FirstOrDefaultAsync(x => x.Email.ToLower() == email &&
+                        x.IsEnabled == true && !x.IsDeleted, cancellationToken);//pronadji usera ili null
+
+            if(user != null)
+            {
+                //ako postoji baci exception
+                throw new MarketConflictException("Korisnik sa unesenim emailom već postoji.");
+            }
+
+            //uzmi rolu client iz baze
+            var clientRole = await db.Roles.FirstOrDefaultAsync(x => x.RoleName == "CLIENT", cancellationToken);
+
+            //u suprotnom kreiramo novog usera
+            var newUser = new UserEntity
+            {
+                Firstname = request.Firstname,
+                Lastname = request.Lastname,
+                Username = request.Username,
+                Email = email,
+                RoleId = clientRole?.Id ?? 0,
+                Role = clientRole,
+                IsEnabled = true,
+                Fullname = string.IsNullOrWhiteSpace(request.Firstname) && string.IsNullOrWhiteSpace(request.Lastname)
+                    ? request.Username ?? string.Empty
+                    : $"{request.Firstname} {request.Lastname}",
+                CreatedAtUtc = DateTime.UtcNow
+                //dodjela role 
+
+            };
+
+            // Hash password (if provided)
+            if (!string.IsNullOrWhiteSpace(request.Password))
+            {
+                newUser.PasswordHash = hasher.HashPassword(newUser, request.Password);
+            }
+
+            // Persist user first so Id is generated (used in JWT claims)
+            await db.Users.AddAsync(newUser, cancellationToken);
+            await db.SaveChangesAsync(cancellationToken);
+
+            // Issue tokens using JwtTokenService
+            var pair = jwt.IssueTokens(newUser);
+
+            // Store refresh token hash in DB (never store raw token)
+            var refreshEntity = new RefreshTokenEntity
+            {
+                TokenHash = pair.RefreshTokenHash,
+                ExpiresAtUtc = pair.RefreshTokenExpiresAtUtc,
+                UserId = newUser.Id,
+                CreatedAtUtc = DateTime.UtcNow
+            };
+
+            await db.RefreshTokens.AddAsync(refreshEntity, cancellationToken);
+            await db.SaveChangesAsync(cancellationToken);
+
+            return new UserRegisterCommandDto
+            {
+                Id = newUser.Id,
+                Fullname = newUser.Fullname,
+                Email = newUser.Email,
+                AccessToken = pair.AccessToken,
+                RefreshToken = pair.RefreshTokenRaw,
+                ExpiresAtUtc = pair.AccessTokenExpiresAtUtc
+            };
+
+        }
+    }
+}
