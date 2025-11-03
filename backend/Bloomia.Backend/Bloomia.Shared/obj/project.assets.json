@@ -496,23 +496,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\nezir\\.nuget\\packages\\": {},
+    "C:\\Users\\Korisnik\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\nezir\\bloomia-app\\backend\\Bloomia.Backend\\Bloomia.Shared\\Bloomia.Shared.csproj",
+      "projectUniqueName": "C:\\Users\\Korisnik\\Desktop\\Bloomia\\bloomia-app\\backend\\Bloomia.Backend\\Bloomia.Shared\\Bloomia.Shared.csproj",
       "projectName": "Bloomia.Shared",
-      "projectPath": "C:\\Users\\nezir\\bloomia-app\\backend\\Bloomia.Backend\\Bloomia.Shared\\Bloomia.Shared.csproj",
-      "packagesPath": "C:\\Users\\nezir\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\nezir\\bloomia-app\\backend\\Bloomia.Backend\\Bloomia.Shared\\obj\\",
+      "projectPath": "C:\\Users\\Korisnik\\Desktop\\Bloomia\\bloomia-app\\backend\\Bloomia.Backend\\Bloomia.Shared\\Bloomia.Shared.csproj",
+      "packagesPath": "C:\\Users\\Korisnik\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Korisnik\\Desktop\\Bloomia\\bloomia-app\\backend\\Bloomia.Backend\\Bloomia.Shared\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\nezir\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Korisnik\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -566,7 +566,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.306/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.305/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

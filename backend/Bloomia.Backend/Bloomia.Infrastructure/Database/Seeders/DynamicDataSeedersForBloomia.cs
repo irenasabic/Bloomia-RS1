@@ -22,6 +22,7 @@ namespace Bloomia.Infrastructure.Database.Seeders
             await SeedTherapyTypes(context);
             await SeedUsersAsync(context);
         }
+
         public static async Task SeedGenders(DatabaseContext context)
         {
             if (await context.Genders.AnyAsync())
@@ -38,10 +39,10 @@ namespace Bloomia.Infrastructure.Database.Seeders
             {
                 Name = "OTHER"
             };
-            context.Genders.AddRange(male, female,other);
+            context.Genders.AddRange(male, female, other);
             await context.SaveChangesAsync();
-
         }
+
         public static async Task SeedLanguage(DatabaseContext context)
         {
             if (await context.Languages.AnyAsync())
@@ -55,7 +56,7 @@ namespace Bloomia.Infrastructure.Database.Seeders
             {
                 Name = "English"
             };
-            context.Languages.AddRange(lang1,lang2);
+            context.Languages.AddRange(lang1, lang2);
             await context.SaveChangesAsync();
         }
         public static async Task SeedLocation(DatabaseContext context)

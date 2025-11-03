@@ -16,6 +16,8 @@ public partial class Program
             .WriteTo.Console() // minimal sink so we see startup errors
             .CreateBootstrapLogger();
 
+
+
         try
         {
             Log.Information("Starting Bloomia API...");
@@ -25,6 +27,8 @@ public partial class Program
             //    environment variables, user-secrets (Dev), and command-line args)
             //
             var builder = WebApplication.CreateBuilder(args);
+
+
 
             // 2) Promote Serilog to full configuration from builder.Configuration
             //    (reads "Serilog" section from appsettings + ENV overrides)

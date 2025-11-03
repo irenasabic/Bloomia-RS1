@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\nezir\\bloomia-app\\backend\\Bloomia.Backend\\Bloomia.Tests\\Bloomia.Tests.csproj": {}
+    "C:\\Users\\Korisnik\\Desktop\\Bloomia\\bloomia-app\\backend\\Bloomia.Backend\\Bloomia.Tests\\Bloomia.Tests.csproj": {}
   },
   "projects": {
-    "C:\\Users\\nezir\\bloomia-app\\backend\\Bloomia.Backend\\Bloomia.API\\Bloomia.API.csproj": {
+    "C:\\Users\\Korisnik\\Desktop\\Bloomia\\bloomia-app\\backend\\Bloomia.Backend\\Bloomia.API\\Bloomia.API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\nezir\\bloomia-app\\backend\\Bloomia.Backend\\Bloomia.API\\Bloomia.API.csproj",
+        "projectUniqueName": "C:\\Users\\Korisnik\\Desktop\\Bloomia\\bloomia-app\\backend\\Bloomia.Backend\\Bloomia.API\\Bloomia.API.csproj",
         "projectName": "Bloomia.API",
-        "projectPath": "C:\\Users\\nezir\\bloomia-app\\backend\\Bloomia.Backend\\Bloomia.API\\Bloomia.API.csproj",
-        "packagesPath": "C:\\Users\\nezir\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\nezir\\bloomia-app\\backend\\Bloomia.Backend\\Bloomia.API\\obj\\",
+        "projectPath": "C:\\Users\\Korisnik\\Desktop\\Bloomia\\bloomia-app\\backend\\Bloomia.Backend\\Bloomia.API\\Bloomia.API.csproj",
+        "packagesPath": "C:\\Users\\Korisnik\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Korisnik\\Desktop\\Bloomia\\bloomia-app\\backend\\Bloomia.Backend\\Bloomia.API\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\nezir\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Korisnik\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -32,14 +32,14 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\nezir\\bloomia-app\\backend\\Bloomia.Backend\\Bloomia.Application\\Bloomia.Application.csproj": {
-                "projectPath": "C:\\Users\\nezir\\bloomia-app\\backend\\Bloomia.Backend\\Bloomia.Application\\Bloomia.Application.csproj"
+              "C:\\Users\\Korisnik\\Desktop\\Bloomia\\bloomia-app\\backend\\Bloomia.Backend\\Bloomia.Application\\Bloomia.Application.csproj": {
+                "projectPath": "C:\\Users\\Korisnik\\Desktop\\Bloomia\\bloomia-app\\backend\\Bloomia.Backend\\Bloomia.Application\\Bloomia.Application.csproj"
               },
-              "C:\\Users\\nezir\\bloomia-app\\backend\\Bloomia.Backend\\Bloomia.Infrastructure\\Bloomia.Infrastructure.csproj": {
-                "projectPath": "C:\\Users\\nezir\\bloomia-app\\backend\\Bloomia.Backend\\Bloomia.Infrastructure\\Bloomia.Infrastructure.csproj"
+              "C:\\Users\\Korisnik\\Desktop\\Bloomia\\bloomia-app\\backend\\Bloomia.Backend\\Bloomia.Infrastructure\\Bloomia.Infrastructure.csproj": {
+                "projectPath": "C:\\Users\\Korisnik\\Desktop\\Bloomia\\bloomia-app\\backend\\Bloomia.Backend\\Bloomia.Infrastructure\\Bloomia.Infrastructure.csproj"
               },
-              "C:\\Users\\nezir\\bloomia-app\\backend\\Bloomia.Backend\\Bloomia.Shared\\Bloomia.Shared.csproj": {
-                "projectPath": "C:\\Users\\nezir\\bloomia-app\\backend\\Bloomia.Backend\\Bloomia.Shared\\Bloomia.Shared.csproj"
+              "C:\\Users\\Korisnik\\Desktop\\Bloomia\\bloomia-app\\backend\\Bloomia.Backend\\Bloomia.Shared\\Bloomia.Shared.csproj": {
+                "projectPath": "C:\\Users\\Korisnik\\Desktop\\Bloomia\\bloomia-app\\backend\\Bloomia.Backend\\Bloomia.Shared\\Bloomia.Shared.csproj"
               }
             }
           }
@@ -126,24 +126,24 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.306/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.305/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\nezir\\bloomia-app\\backend\\Bloomia.Backend\\Bloomia.Application\\Bloomia.Application.csproj": {
+    "C:\\Users\\Korisnik\\Desktop\\Bloomia\\bloomia-app\\backend\\Bloomia.Backend\\Bloomia.Application\\Bloomia.Application.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\nezir\\bloomia-app\\backend\\Bloomia.Backend\\Bloomia.Application\\Bloomia.Application.csproj",
+        "projectUniqueName": "C:\\Users\\Korisnik\\Desktop\\Bloomia\\bloomia-app\\backend\\Bloomia.Backend\\Bloomia.Application\\Bloomia.Application.csproj",
         "projectName": "Bloomia.Application",
-        "projectPath": "C:\\Users\\nezir\\bloomia-app\\backend\\Bloomia.Backend\\Bloomia.Application\\Bloomia.Application.csproj",
-        "packagesPath": "C:\\Users\\nezir\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\nezir\\bloomia-app\\backend\\Bloomia.Backend\\Bloomia.Application\\obj\\",
+        "projectPath": "C:\\Users\\Korisnik\\Desktop\\Bloomia\\bloomia-app\\backend\\Bloomia.Backend\\Bloomia.Application\\Bloomia.Application.csproj",
+        "packagesPath": "C:\\Users\\Korisnik\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Korisnik\\Desktop\\Bloomia\\bloomia-app\\backend\\Bloomia.Backend\\Bloomia.Application\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\nezir\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Korisnik\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -158,11 +158,11 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\nezir\\bloomia-app\\backend\\Bloomia.Backend\\Bloomia.Domain\\Bloomia.Domain.csproj": {
-                "projectPath": "C:\\Users\\nezir\\bloomia-app\\backend\\Bloomia.Backend\\Bloomia.Domain\\Bloomia.Domain.csproj"
+              "C:\\Users\\Korisnik\\Desktop\\Bloomia\\bloomia-app\\backend\\Bloomia.Backend\\Bloomia.Domain\\Bloomia.Domain.csproj": {
+                "projectPath": "C:\\Users\\Korisnik\\Desktop\\Bloomia\\bloomia-app\\backend\\Bloomia.Backend\\Bloomia.Domain\\Bloomia.Domain.csproj"
               },
-              "C:\\Users\\nezir\\bloomia-app\\backend\\Bloomia.Backend\\Bloomia.Shared\\Bloomia.Shared.csproj": {
-                "projectPath": "C:\\Users\\nezir\\bloomia-app\\backend\\Bloomia.Backend\\Bloomia.Shared\\Bloomia.Shared.csproj"
+              "C:\\Users\\Korisnik\\Desktop\\Bloomia\\bloomia-app\\backend\\Bloomia.Backend\\Bloomia.Shared\\Bloomia.Shared.csproj": {
+                "projectPath": "C:\\Users\\Korisnik\\Desktop\\Bloomia\\bloomia-app\\backend\\Bloomia.Backend\\Bloomia.Shared\\Bloomia.Shared.csproj"
               }
             }
           }
@@ -224,24 +224,24 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.306/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.305/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\nezir\\bloomia-app\\backend\\Bloomia.Backend\\Bloomia.Domain\\Bloomia.Domain.csproj": {
+    "C:\\Users\\Korisnik\\Desktop\\Bloomia\\bloomia-app\\backend\\Bloomia.Backend\\Bloomia.Domain\\Bloomia.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\nezir\\bloomia-app\\backend\\Bloomia.Backend\\Bloomia.Domain\\Bloomia.Domain.csproj",
+        "projectUniqueName": "C:\\Users\\Korisnik\\Desktop\\Bloomia\\bloomia-app\\backend\\Bloomia.Backend\\Bloomia.Domain\\Bloomia.Domain.csproj",
         "projectName": "Bloomia.Domain",
-        "projectPath": "C:\\Users\\nezir\\bloomia-app\\backend\\Bloomia.Backend\\Bloomia.Domain\\Bloomia.Domain.csproj",
-        "packagesPath": "C:\\Users\\nezir\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\nezir\\bloomia-app\\backend\\Bloomia.Backend\\Bloomia.Domain\\obj\\",
+        "projectPath": "C:\\Users\\Korisnik\\Desktop\\Bloomia\\bloomia-app\\backend\\Bloomia.Backend\\Bloomia.Domain\\Bloomia.Domain.csproj",
+        "packagesPath": "C:\\Users\\Korisnik\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Korisnik\\Desktop\\Bloomia\\bloomia-app\\backend\\Bloomia.Backend\\Bloomia.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\nezir\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Korisnik\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -295,24 +295,24 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.306/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.305/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\nezir\\bloomia-app\\backend\\Bloomia.Backend\\Bloomia.Infrastructure\\Bloomia.Infrastructure.csproj": {
+    "C:\\Users\\Korisnik\\Desktop\\Bloomia\\bloomia-app\\backend\\Bloomia.Backend\\Bloomia.Infrastructure\\Bloomia.Infrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\nezir\\bloomia-app\\backend\\Bloomia.Backend\\Bloomia.Infrastructure\\Bloomia.Infrastructure.csproj",
+        "projectUniqueName": "C:\\Users\\Korisnik\\Desktop\\Bloomia\\bloomia-app\\backend\\Bloomia.Backend\\Bloomia.Infrastructure\\Bloomia.Infrastructure.csproj",
         "projectName": "Bloomia.Infrastructure",
-        "projectPath": "C:\\Users\\nezir\\bloomia-app\\backend\\Bloomia.Backend\\Bloomia.Infrastructure\\Bloomia.Infrastructure.csproj",
-        "packagesPath": "C:\\Users\\nezir\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\nezir\\bloomia-app\\backend\\Bloomia.Backend\\Bloomia.Infrastructure\\obj\\",
+        "projectPath": "C:\\Users\\Korisnik\\Desktop\\Bloomia\\bloomia-app\\backend\\Bloomia.Backend\\Bloomia.Infrastructure\\Bloomia.Infrastructure.csproj",
+        "packagesPath": "C:\\Users\\Korisnik\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Korisnik\\Desktop\\Bloomia\\bloomia-app\\backend\\Bloomia.Backend\\Bloomia.Infrastructure\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\nezir\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Korisnik\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -327,14 +327,14 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\nezir\\bloomia-app\\backend\\Bloomia.Backend\\Bloomia.Application\\Bloomia.Application.csproj": {
-                "projectPath": "C:\\Users\\nezir\\bloomia-app\\backend\\Bloomia.Backend\\Bloomia.Application\\Bloomia.Application.csproj"
+              "C:\\Users\\Korisnik\\Desktop\\Bloomia\\bloomia-app\\backend\\Bloomia.Backend\\Bloomia.Application\\Bloomia.Application.csproj": {
+                "projectPath": "C:\\Users\\Korisnik\\Desktop\\Bloomia\\bloomia-app\\backend\\Bloomia.Backend\\Bloomia.Application\\Bloomia.Application.csproj"
               },
-              "C:\\Users\\nezir\\bloomia-app\\backend\\Bloomia.Backend\\Bloomia.Domain\\Bloomia.Domain.csproj": {
-                "projectPath": "C:\\Users\\nezir\\bloomia-app\\backend\\Bloomia.Backend\\Bloomia.Domain\\Bloomia.Domain.csproj"
+              "C:\\Users\\Korisnik\\Desktop\\Bloomia\\bloomia-app\\backend\\Bloomia.Backend\\Bloomia.Domain\\Bloomia.Domain.csproj": {
+                "projectPath": "C:\\Users\\Korisnik\\Desktop\\Bloomia\\bloomia-app\\backend\\Bloomia.Backend\\Bloomia.Domain\\Bloomia.Domain.csproj"
               },
-              "C:\\Users\\nezir\\bloomia-app\\backend\\Bloomia.Backend\\Bloomia.Shared\\Bloomia.Shared.csproj": {
-                "projectPath": "C:\\Users\\nezir\\bloomia-app\\backend\\Bloomia.Backend\\Bloomia.Shared\\Bloomia.Shared.csproj"
+              "C:\\Users\\Korisnik\\Desktop\\Bloomia\\bloomia-app\\backend\\Bloomia.Backend\\Bloomia.Shared\\Bloomia.Shared.csproj": {
+                "projectPath": "C:\\Users\\Korisnik\\Desktop\\Bloomia\\bloomia-app\\backend\\Bloomia.Backend\\Bloomia.Shared\\Bloomia.Shared.csproj"
               }
             }
           }
@@ -407,24 +407,24 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.306/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.305/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\nezir\\bloomia-app\\backend\\Bloomia.Backend\\Bloomia.Shared\\Bloomia.Shared.csproj": {
+    "C:\\Users\\Korisnik\\Desktop\\Bloomia\\bloomia-app\\backend\\Bloomia.Backend\\Bloomia.Shared\\Bloomia.Shared.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\nezir\\bloomia-app\\backend\\Bloomia.Backend\\Bloomia.Shared\\Bloomia.Shared.csproj",
+        "projectUniqueName": "C:\\Users\\Korisnik\\Desktop\\Bloomia\\bloomia-app\\backend\\Bloomia.Backend\\Bloomia.Shared\\Bloomia.Shared.csproj",
         "projectName": "Bloomia.Shared",
-        "projectPath": "C:\\Users\\nezir\\bloomia-app\\backend\\Bloomia.Backend\\Bloomia.Shared\\Bloomia.Shared.csproj",
-        "packagesPath": "C:\\Users\\nezir\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\nezir\\bloomia-app\\backend\\Bloomia.Backend\\Bloomia.Shared\\obj\\",
+        "projectPath": "C:\\Users\\Korisnik\\Desktop\\Bloomia\\bloomia-app\\backend\\Bloomia.Backend\\Bloomia.Shared\\Bloomia.Shared.csproj",
+        "packagesPath": "C:\\Users\\Korisnik\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Korisnik\\Desktop\\Bloomia\\bloomia-app\\backend\\Bloomia.Backend\\Bloomia.Shared\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\nezir\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Korisnik\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -478,24 +478,24 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.306/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.305/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\nezir\\bloomia-app\\backend\\Bloomia.Backend\\Bloomia.Tests\\Bloomia.Tests.csproj": {
+    "C:\\Users\\Korisnik\\Desktop\\Bloomia\\bloomia-app\\backend\\Bloomia.Backend\\Bloomia.Tests\\Bloomia.Tests.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\nezir\\bloomia-app\\backend\\Bloomia.Backend\\Bloomia.Tests\\Bloomia.Tests.csproj",
+        "projectUniqueName": "C:\\Users\\Korisnik\\Desktop\\Bloomia\\bloomia-app\\backend\\Bloomia.Backend\\Bloomia.Tests\\Bloomia.Tests.csproj",
         "projectName": "Bloomia.Tests",
-        "projectPath": "C:\\Users\\nezir\\bloomia-app\\backend\\Bloomia.Backend\\Bloomia.Tests\\Bloomia.Tests.csproj",
-        "packagesPath": "C:\\Users\\nezir\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\nezir\\bloomia-app\\backend\\Bloomia.Backend\\Bloomia.Tests\\obj\\",
+        "projectPath": "C:\\Users\\Korisnik\\Desktop\\Bloomia\\bloomia-app\\backend\\Bloomia.Backend\\Bloomia.Tests\\Bloomia.Tests.csproj",
+        "packagesPath": "C:\\Users\\Korisnik\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Korisnik\\Desktop\\Bloomia\\bloomia-app\\backend\\Bloomia.Backend\\Bloomia.Tests\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\nezir\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Korisnik\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -510,14 +510,14 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\nezir\\bloomia-app\\backend\\Bloomia.Backend\\Bloomia.API\\Bloomia.API.csproj": {
-                "projectPath": "C:\\Users\\nezir\\bloomia-app\\backend\\Bloomia.Backend\\Bloomia.API\\Bloomia.API.csproj"
+              "C:\\Users\\Korisnik\\Desktop\\Bloomia\\bloomia-app\\backend\\Bloomia.Backend\\Bloomia.API\\Bloomia.API.csproj": {
+                "projectPath": "C:\\Users\\Korisnik\\Desktop\\Bloomia\\bloomia-app\\backend\\Bloomia.Backend\\Bloomia.API\\Bloomia.API.csproj"
               },
-              "C:\\Users\\nezir\\bloomia-app\\backend\\Bloomia.Backend\\Bloomia.Application\\Bloomia.Application.csproj": {
-                "projectPath": "C:\\Users\\nezir\\bloomia-app\\backend\\Bloomia.Backend\\Bloomia.Application\\Bloomia.Application.csproj"
+              "C:\\Users\\Korisnik\\Desktop\\Bloomia\\bloomia-app\\backend\\Bloomia.Backend\\Bloomia.Application\\Bloomia.Application.csproj": {
+                "projectPath": "C:\\Users\\Korisnik\\Desktop\\Bloomia\\bloomia-app\\backend\\Bloomia.Backend\\Bloomia.Application\\Bloomia.Application.csproj"
               },
-              "C:\\Users\\nezir\\bloomia-app\\backend\\Bloomia.Backend\\Bloomia.Shared\\Bloomia.Shared.csproj": {
-                "projectPath": "C:\\Users\\nezir\\bloomia-app\\backend\\Bloomia.Backend\\Bloomia.Shared\\Bloomia.Shared.csproj"
+              "C:\\Users\\Korisnik\\Desktop\\Bloomia\\bloomia-app\\backend\\Bloomia.Backend\\Bloomia.Shared\\Bloomia.Shared.csproj": {
+                "projectPath": "C:\\Users\\Korisnik\\Desktop\\Bloomia\\bloomia-app\\backend\\Bloomia.Backend\\Bloomia.Shared\\Bloomia.Shared.csproj"
               }
             }
           }
@@ -587,7 +587,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.306/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.305/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

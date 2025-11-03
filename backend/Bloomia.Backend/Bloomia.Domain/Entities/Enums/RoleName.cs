@@ -8,8 +8,8 @@ namespace Bloomia.Domain.Entities.Enums
 {
     public enum RoleName
     {
-        ADMIN,
-        CLIENT,
-        THERAPIST
+        ADMIN = 1,
+        CLIENT = 2,
+        THERAPIST = 3
     }
 }
