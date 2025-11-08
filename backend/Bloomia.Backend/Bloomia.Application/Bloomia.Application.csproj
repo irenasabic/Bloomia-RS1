@@ -20,4 +20,8 @@
     <ProjectReference Include="..\Bloomia.Shared\Bloomia.Shared.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Modules\Users\Commands\Status\" />
+  </ItemGroup>
+
 </Project>

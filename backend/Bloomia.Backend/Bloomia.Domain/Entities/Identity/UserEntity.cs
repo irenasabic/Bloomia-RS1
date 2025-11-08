@@ -12,14 +12,14 @@ namespace Bloomia.Domain.Entities.Identity
 {
     public class UserEntity: BaseEntity
     {
-        public string Firstname {  get; set; }  
-        public string Lastname { get; set; }
+        public required string Firstname {  get; set; }  
+        public required string Lastname { get; set; }
         public string? Username { get; set; }
         public string? Fullname {  get; set; }
         public DateTime? DateOfBirth { get; set; }
         public string? ProfileImage { get; set; }
 
-        public string Email { get; set; }   
+        public required string Email { get; set; }   
         public string? PasswordHash { get; set; }
         public string? PasswordSalt { get; set; }
         public string? PhoneNumber { get; set; }

@@ -58,8 +58,8 @@ public sealed class MarketExceptionHandler(
         }
         ctx.Response.StatusCode = ex switch
         {
-            MarketNotFoundException => StatusCodes.Status404NotFound,
-            MarketConflictException or MarketBusinessRuleException => StatusCodes.Status409Conflict,
+            BloomiaNotFoundException => StatusCodes.Status404NotFound,
+            BloomiaConflictException or BloomiaBusinessRuleException => StatusCodes.Status409Conflict,
             ValidationException => StatusCodes.Status400BadRequest,
             _ => StatusCodes.Status500InternalServerError
         };
@@ -77,9 +77,9 @@ public sealed class MarketExceptionHandler(
 
         switch (ex)
         {
-            case MarketNotFoundException:
-            case MarketConflictException:
-            case MarketBusinessRuleException:
+            case BloomiaNotFoundException:
+            case BloomiaConflictException:
+            case BloomiaBusinessRuleException:
                 code = "entity.error";
                 message = ex.Message;
                 break;

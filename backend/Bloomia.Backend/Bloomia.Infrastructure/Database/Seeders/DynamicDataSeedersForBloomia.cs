@@ -24,8 +24,38 @@ namespace Bloomia.Infrastructure.Database.Seeders
             await SeedGenders(context);
             await SeedLocation(context);
             await SeedTherapyTypes(context);
+            await SeedDocuments(context);
             await SeedUsersAsync(context);
         }
+
+        public static async Task SeedDocuments(DatabaseContext context)
+        {
+            if (await context.Documents.AnyAsync())
+                return;
+
+            var demoDocument1 = new DocumentEntity
+            {
+                DocumentType = "CV",
+                FilePath="/uploads/documents/CV.pdf",
+                FileName = "CV.pdf",
+                FileExtension = ".pdf",
+                UploadedAt=DateTime.UtcNow
+            };
+
+            var demoDocument2 = new DocumentEntity 
+            {
+                DocumentType = "CV",
+                FilePath = "/uploads/documents/CV2.pdf",
+                FileName = "CV2.pdf",
+                FileExtension = ".pdf",
+                UploadedAt = DateTime.UtcNow 
+            };
+
+            context.Documents.AddRange(demoDocument1, demoDocument2);
+            await context.SaveChangesAsync();
+
+        }
+
         public static async Task SeedGenders(DatabaseContext context)
         {
             if (await context.Genders.AnyAsync())
@@ -42,10 +72,10 @@ namespace Bloomia.Infrastructure.Database.Seeders
             {
                 Name = "OTHER"
             };
-            context.Genders.AddRange(male, female,other);
+            context.Genders.AddRange(male, female, other);
             await context.SaveChangesAsync();
-
         }
+
         public static async Task SeedLanguage(DatabaseContext context)
         {
             if (await context.Languages.AnyAsync())
@@ -59,7 +89,7 @@ namespace Bloomia.Infrastructure.Database.Seeders
             {
                 Name = "English"
             };
-            context.Languages.AddRange(lang1,lang2);
+            context.Languages.AddRange(lang1, lang2);
             await context.SaveChangesAsync();
         }
         public static async Task SeedLocation(DatabaseContext context)
