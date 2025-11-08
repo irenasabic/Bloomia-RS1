@@ -10,9 +10,7 @@ namespace Bloomia.Application.Modules.SelfTests.Queries.GetById
     {
         public async Task<GetSelfTestByIdQueryDto> Handle(GetSelfTestByIdQuery request, CancellationToken cancellationToken)
         {
-            //vadimo test za koji nam dodje zahtjev
             var selfTest = await context.SelfTests.FirstOrDefaultAsync(x => x.Id == request.SelfTestId, cancellationToken);
-            //imam test trebam pitanja
             if (selfTest == null)
             {
                 throw new ValidationException(message: "SelfTest doesn't exist!");

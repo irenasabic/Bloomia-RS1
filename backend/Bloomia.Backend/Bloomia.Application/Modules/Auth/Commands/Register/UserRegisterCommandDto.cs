@@ -20,6 +20,5 @@ namespace Bloomia.Application.Modules.Auth.Commands.Register
         public string Country { get; set; }
         public string Language { get; set; }
         public DateTime? DateOfBirth { get; set; }
-        //if sarajevo != City u locationu kao string ako ne postoji onda dodajemo 
     }
 }

@@ -10,15 +10,9 @@ namespace Bloomia.Application.Modules.SelfTests.Queries.List
     {
         public async Task<ListAllSelfTestsQueryDto> Handle(ListSelfTestQuery request, CancellationToken cancellationToken)
         {
-            //prikaz self testova koje imamo
-            //vadimo selftestove iz baze 
-            //questions od selftestova i prebacujemo u dto
-
             var selfTests = context.SelfTests.AsNoTracking();
-            //lista self testova
             var allSelfTests = new ListAllSelfTestsQueryDto();
-           
-            
+
             foreach (var test in selfTests) {
 
                 var testDto = new ListSelfTestQueryDto
@@ -39,7 +33,6 @@ namespace Bloomia.Application.Modules.SelfTests.Queries.List
                 allSelfTests.AllSelfTests.Add(testDto);
             }
             return allSelfTests;
-            //a ja trebam vratiti listu selftestova a ne jedan objekat dto
         }
     }
 }

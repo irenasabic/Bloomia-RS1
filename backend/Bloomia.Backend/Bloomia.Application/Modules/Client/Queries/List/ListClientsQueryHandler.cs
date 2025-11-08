@@ -10,16 +10,11 @@ namespace Bloomia.Application.Modules.Client.Queries.List
     {
         public async Task<PageResult<ListClientsQueryDto>> Handle(ListClientsQuery request, CancellationToken cancellationToken)
         {
-            //ovo je metoda za prikaz klijenata po pretrazi. 
-            //prvo 
             var clients = context.Clients.AsNoTracking();
 
             if (!string.IsNullOrWhiteSpace(request.Search))
-            {
-                //ako ima nesto u searchu
-                clients = clients.Where(x => x.User.Fullname.Contains(request.Search));
-                //izdvoji mi samo one koji imaju ono iz searcha
-                    
+            { 
+                clients = clients.Where(x => x.User.Fullname.Contains(request.Search));                   
             }
 
             var clientsQuery = clients.OrderBy(x => x.User.Fullname)

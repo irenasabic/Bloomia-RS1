@@ -11,7 +11,7 @@ namespace Bloomia.Application.Modules.SelfTests.Command
         public int TestId { get; init; }
         public string? TestName { get; init; }
         [JsonIgnore]
-        public int UserId { get; set; }//naci cemo ga preko tokena koji nam proslijedi user ne client
+        public int UserId { get; set; }
         public List<SelfTestAnswersCommandDto> TestAnswers { get; init; }=new List<SelfTestAnswersCommandDto>();
     }
     public class SelfTestAnswersCommandDto

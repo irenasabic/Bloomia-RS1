@@ -140,10 +140,6 @@ namespace Bloomia.Infrastructure.Database.Seeders
                 return;
             if (await context.SelfTestQuestions.AnyAsync())
                 return;
-            //context.SelfTestResults.RemoveRange(context.SelfTestResults);
-            //context.SelfTestQuestions.RemoveRange(context.SelfTestQuestions);
-            //context.SelfTests.RemoveRange(context.SelfTests);
-            await context.SaveChangesAsync();
 
             var selfTest1 = new SelfTestEntity
             {
@@ -258,14 +254,6 @@ namespace Bloomia.Infrastructure.Database.Seeders
             context.SelfTestQuestions.AddRange(q1,q2,q3,q4,q5,q6,q7,q8,q9,q10,q11,q12,q13,q14,q15);
             await context.SaveChangesAsync();
         }
-
-        public static async Task SeedSelfTestQuestions (DatabaseContext context)
-        {
-            if (await context.SelfTestQuestions.AnyAsync())
-                return;
-
-        }
-
         public static async Task SeedTherapyTypes(DatabaseContext context)
         {
             if (await context.TherapyTypes.AnyAsync())
