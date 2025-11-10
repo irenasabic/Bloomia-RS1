@@ -27,6 +27,49 @@ namespace Bloomia.Infrastructure.Database.Seeders
             await SeedTherapyTypes(context);
             await SeedDocuments(context);
             await SeedUsersAsync(context);
+            await SeedArticles(context);
+        }
+
+        public static async Task SeedArticles(DatabaseContext context)
+        {
+            if (await context.Articles.AnyAsync())
+                return;
+
+            //admin kao autor article-a
+            var admin = await context.Admins
+                .FirstOrDefaultAsync();
+            if(admin == null) 
+                return;
+
+            var article1 = new ArticleEntity
+            {
+                AdminId = admin.Id,
+                Admin = admin,
+                Title = "The importance of emotional regulation",
+                Content = "Emotional regulation is key to maintaining mental health and stability...",
+                PublishedAt = DateTime.UtcNow
+            };
+
+            var article2 = new ArticleEntity
+            {
+                AdminId = admin.Id,
+                Admin = admin,
+                Title = "Coping with Stress: Techniques and Tips",
+                Content = "Stress affects everyone differently. Here are some effective coping mechanisms...",
+                PublishedAt = DateTime.UtcNow
+            };
+
+            var article3 = new ArticleEntity
+            {
+                AdminId = admin.Id,
+                Admin = admin,
+                Title = "Understanding Cognitive Behavioral Therapy",
+                Content = "CBT is a widely used therapy that focuses on changing negative thought patterns...",
+                PublishedAt = DateTime.UtcNow
+            };
+
+            context.Articles.AddRange(article1, article2, article3);
+            await context.SaveChangesAsync();
         }
 
         public static async Task SeedDocuments(DatabaseContext context)
