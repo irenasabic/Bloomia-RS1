@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Bloomia.Domain")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a517f736c658e2a74a7d753690340f54067e5cee")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a4b86a4a3b548ab862c9516578d5d1535ba0bc69")]
 [assembly: System.Reflection.AssemblyProductAttribute("Bloomia.Domain")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Bloomia.Domain")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
