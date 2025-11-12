@@ -10,17 +10,12 @@ namespace Bloomia.Application.Modules.SelfTests.Command.DeleteSelfTest
     {
         public async Task<Unit> Handle(DeleteSelfTestCommand request, CancellationToken cancellationToken)
         {
-           //provjera id testa
            var selfTest= await context.SelfTests.FirstOrDefaultAsync(x => x.Id == request.SelfTestId, cancellationToken);
             if (selfTest==null)
             {
                 throw new BloomiaNotFoundException("Self test doesn't exist in database!");
             }
 
-            //var results = await context.SelfTestResults.Include(x => x.TestAnswers)
-            //    .ThenInclude(x => x.SelfTestQuestion).ThenInclude(x => x.SelfTest)
-            //    .Where(x => x.TestAnswers.Any(z => z.SelfTestQuestion.SelfTest.Id == selfTest.Id)).ToListAsync(cancellationToken);
-           
             var questions = await context.SelfTestQuestions
                 .Where(x => x.SelfTestId == selfTest.Id).ToListAsync(cancellationToken);
             foreach (var q in questions)
@@ -29,7 +24,6 @@ namespace Bloomia.Application.Modules.SelfTests.Command.DeleteSelfTest
             }
             selfTest.IsDeleted = true;
             await context.SaveChangesAsync(cancellationToken);
-
             return Unit.Value;
         }
     }

@@ -10,7 +10,6 @@ namespace Bloomia.Application.Modules.SelfTests.Command.UpdateSelfTest
     {
         public async Task<UpdateSelfTestCommandDto> Handle(UpdateSelfTestCommand request, CancellationToken cancellationToken)
         {
-            //ako 
             var selfTest=await context.SelfTests.FirstOrDefaultAsync(x => x.Id == request.SelfTestId, cancellationToken);
             if (selfTest == null)
             {
