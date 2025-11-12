@@ -11,10 +11,8 @@ namespace Bloomia.Application.Modules.SelfTests.Command.CreateSelfTest
     {
         public async Task<CreateSelfTestCommandDto> Handle(CreateSelfTestCommand request, CancellationToken cancellationToken)
         {
-            //uzimamo title i statements
-            //uvjeriti se da title nije prazan
             var title = request.Title?.Trim();
-            //registrovati pitanja u bazu 
+           
             var st = await context.SelfTests.Include(x => x.TestQuestions)
                 .FirstOrDefaultAsync(x => x.TestName.ToLower() == title.ToLower(), cancellationToken);
 
@@ -28,7 +26,7 @@ namespace Bloomia.Application.Modules.SelfTests.Command.CreateSelfTest
             };
             context.SelfTests.Add(selfTest);
             await context.SaveChangesAsync(cancellationToken);
-            //reg pitanja
+            
             foreach(var s in request.Statements)
             {
                 var question = new SelfTestQuestionEntity
@@ -41,7 +39,6 @@ namespace Bloomia.Application.Modules.SelfTests.Command.CreateSelfTest
             }
             await context.SaveChangesAsync(cancellationToken);
 
-            //vratiti dto
             var selfTestDto = new CreateSelfTestCommandDto
             {
                 Id = selfTest.Id,

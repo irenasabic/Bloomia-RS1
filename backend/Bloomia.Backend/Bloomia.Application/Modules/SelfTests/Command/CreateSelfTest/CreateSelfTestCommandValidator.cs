@@ -8,7 +8,6 @@ namespace Bloomia.Application.Modules.SelfTests.Command.CreateSelfTest
 {
     public class CreateSelfTestCommandValidator: AbstractValidator<CreateSelfTestCommand>
     {
-        //title ne smije biti prazan
         public CreateSelfTestCommandValidator()
         {
             RuleFor(x => x.Title).NotEmpty().WithMessage("Title is required!")
