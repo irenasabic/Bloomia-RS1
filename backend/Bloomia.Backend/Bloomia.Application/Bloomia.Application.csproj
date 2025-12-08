@@ -7,6 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Modules\TherapistAvailability\Query\ListAllTimes\**" />
+    <EmbeddedResource Remove="Modules\TherapistAvailability\Query\ListAllTimes\**" />
+    <None Remove="Modules\TherapistAvailability\Query\ListAllTimes\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="FluentValidation" Version="12.0.0" />
     <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="12.0.0" />
     <PackageReference Include="MediatR" Version="12.5.0" />
@@ -21,6 +27,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Modules\TherapistAvailability\Command\Delete\DeleteDateFromAvailability\" />
     <Folder Include="Modules\Users\Commands\Status\" />
   </ItemGroup>
 
