@@ -8,12 +8,11 @@ using System.Threading.Tasks;
 
 namespace Bloomia.Domain.Entities.TherapistRelated
 {
-    public class TherapistAvailabilityEntity:BaseEntity
+    public class TherapistAvailabilityEntity : BaseEntity
     {
         public int TherapistId { get; set; }
         public TherapistEntity Therapist { get; set; }
-
-        public DateOnly Date {  get; set; }
+        public DateOnly Date { get; set; }
         public TimeOnly StartTime { get; set; }
         public bool IsBooked { get; set; }
 
