@@ -12,11 +12,9 @@ namespace Bloomia.Domain.Entities.TherapistRelated
     {
         public int TherapistId { get; set; }
         public TherapistEntity Therapist { get; set; }
-
         public DateOnly Date { get; set; }
         public TimeOnly StartTime { get; set; }
         public bool IsBooked { get; set; }
-
 
         public AppointmentEntity? Appointment { get; set; }
         public int AppointmentId { get; set; }
