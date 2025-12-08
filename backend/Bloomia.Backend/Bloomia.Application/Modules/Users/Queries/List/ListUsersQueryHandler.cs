@@ -31,7 +31,7 @@ namespace Bloomia.Application.Modules.Users.Queries.List
                 query = query.Where(x => x.IsEnabled == request.OnlyEnabled);
             }
 
-            if(request.Role !=null)
+            if(request.Role != null)
             {
                 query = query.Where(x => x.Role.RoleName == request.Role);
             }
