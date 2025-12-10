@@ -28,9 +28,6 @@ namespace Bloomia.Application.Modules.Appointments.Query.List
                             SessionType=x.SessionType.ToString()         
                         }).AsNoTracking();
 
-            //var dto = new ListAppointmentsQueryDto();
-            //dto.ClientAppointments.AddRange(appointments);
-            //return dto;
             return appointments.ToList();
         }
     }
