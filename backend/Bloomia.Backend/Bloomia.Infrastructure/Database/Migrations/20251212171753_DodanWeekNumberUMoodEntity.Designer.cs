@@ -4,6 +4,7 @@ using Bloomia.Infrastructure.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Bloomia.Infrastructure.Database.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20251212171753_DodanWeekNumberUMoodEntity")]
+    partial class DodanWeekNumberUMoodEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -438,15 +441,6 @@ namespace Bloomia.Infrastructure.Database.Migrations
                     b.Property<int>("ClientId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("CreatedAtUtc")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("ModifiedAtUtc")
-                        .HasColumnType("datetime2");
-
                     b.Property<DateTime>("RecordedTime")
                         .HasColumnType("datetime2");
 
@@ -721,15 +715,6 @@ namespace Bloomia.Infrastructure.Database.Migrations
                     b.Property<int>("ClientId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("CreatedAtUtc")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("ModifiedAtUtc")
-                        .HasColumnType("datetime2");
-
                     b.Property<int>("ReviewId")
                         .HasColumnType("int");
 
@@ -744,8 +729,7 @@ namespace Bloomia.Infrastructure.Database.Migrations
                     b.HasIndex("ClientId");
 
                     b.HasIndex("TherapistAvailabilityId")
-                        .IsUnique()
-                        .HasFilter("[IsDeleted]=0");
+                        .IsUnique();
 
                     b.ToTable("Appointments", (string)null);
                 });
@@ -768,38 +752,6 @@ namespace Bloomia.Infrastructure.Database.Migrations
                     b.ToTable("ChatSessions", (string)null);
                 });
 
-            modelBuilder.Entity("Bloomia.Domain.Entities.Sessions.DirectChatEntity", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("ClientId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("CreatedAtUtc")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("ModifiedAtUtc")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("TherapistId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ClientId");
-
-                    b.HasIndex("TherapistId");
-
-                    b.ToTable("DirectChats", (string)null);
-                });
-
             modelBuilder.Entity("Bloomia.Domain.Entities.Sessions.MessageEntity", b =>
                 {
                     b.Property<int>("Id")
@@ -808,7 +760,7 @@ namespace Bloomia.Infrastructure.Database.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("ChatSessionId")
+                    b.Property<int>("ChatSessionId")
                         .HasColumnType("int");
 
                     b.Property<string>("Content")
@@ -816,23 +768,12 @@ namespace Bloomia.Infrastructure.Database.Migrations
                         .HasMaxLength(2000)
                         .HasColumnType("nvarchar(2000)");
 
-                    b.Property<DateTime>("CreatedAtUtc")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int?>("DirectChatId")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("ModifiedAtUtc")
-                        .HasColumnType("datetime2");
-
                     b.Property<int>("SenderId")
                         .HasColumnType("int");
 
-                    b.Property<int>("SenderType")
-                        .HasColumnType("int");
+                    b.Property<string>("SenderType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("SentAt")
                         .HasColumnType("datetime2");
@@ -843,8 +784,6 @@ namespace Bloomia.Infrastructure.Database.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("ChatSessionId");
-
-                    b.HasIndex("DirectChatId");
 
                     b.ToTable("Messages", (string)null);
                 });
@@ -905,7 +844,7 @@ namespace Bloomia.Infrastructure.Database.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("AppointmentId")
+                    b.Property<int>("AppointmentId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedAtUtc")
@@ -1186,7 +1125,8 @@ namespace Bloomia.Infrastructure.Database.Migrations
                     b.HasOne("Bloomia.Domain.Entities.TherapistRelated.TherapistAvailabilityEntity", "TherapistAvailability")
                         .WithOne("Appointment")
                         .HasForeignKey("Bloomia.Domain.Entities.Sessions.AppointmentEntity", "TherapistAvailabilityId")
-                        .OnDelete(DeleteBehavior.NoAction);
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
 
                     b.Navigation("Client");
 
@@ -1204,40 +1144,15 @@ namespace Bloomia.Infrastructure.Database.Migrations
                     b.Navigation("Appointment");
                 });
 
-            modelBuilder.Entity("Bloomia.Domain.Entities.Sessions.DirectChatEntity", b =>
-                {
-                    b.HasOne("Bloomia.Domain.Entities.ClientEntity", "Client")
-                        .WithMany()
-                        .HasForeignKey("ClientId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.HasOne("Bloomia.Domain.Entities.TherapistEntity", "Therapist")
-                        .WithMany()
-                        .HasForeignKey("TherapistId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.Navigation("Client");
-
-                    b.Navigation("Therapist");
-                });
-
             modelBuilder.Entity("Bloomia.Domain.Entities.Sessions.MessageEntity", b =>
                 {
                     b.HasOne("Bloomia.Domain.Entities.Sessions.ChatSessionEntity", "ChatSession")
                         .WithMany("Messages")
                         .HasForeignKey("ChatSessionId")
-                        .OnDelete(DeleteBehavior.NoAction);
-
-                    b.HasOne("Bloomia.Domain.Entities.Sessions.DirectChatEntity", "DirectChat")
-                        .WithMany("Messages")
-                        .HasForeignKey("DirectChatId")
-                        .OnDelete(DeleteBehavior.NoAction);
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
 
                     b.Navigation("ChatSession");
-
-                    b.Navigation("DirectChat");
                 });
 
             modelBuilder.Entity("Bloomia.Domain.Entities.TherapistEntity", b =>
@@ -1335,11 +1250,6 @@ namespace Bloomia.Infrastructure.Database.Migrations
                 });
 
             modelBuilder.Entity("Bloomia.Domain.Entities.Sessions.ChatSessionEntity", b =>
-                {
-                    b.Navigation("Messages");
-                });
-
-            modelBuilder.Entity("Bloomia.Domain.Entities.Sessions.DirectChatEntity", b =>
                 {
                     b.Navigation("Messages");
                 });
