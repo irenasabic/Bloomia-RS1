@@ -63,7 +63,7 @@ namespace Bloomia.Application.Modules.Reviews.Commands.Create
                 .Where(x => x.Appointment.TherapistAvailability.TherapistId == therapistId)
                 .AverageAsync(x => (float)x.Rating, ct);
 
-            therapist.RatingAvg = averageRating;
+            therapist.RatingAvg = (float)Math.Round(averageRating, 1);
             await context.SaveChangesAsync(ct);
 
             return review.Id;
