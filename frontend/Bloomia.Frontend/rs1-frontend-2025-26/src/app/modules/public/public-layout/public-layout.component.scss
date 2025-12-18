@@ -1,0 +1,597 @@
+// src/app/pages/landing/landing.component.scss
+
+// === VARIJABLE ===
+$primary-blue: #4a90e2;
+$light-blue: #e8f4fd;
+$lighter-blue: #d8e1eb;
+$dark-blue: #2e5c8a;
+$accent-blue: #64b5f6;
+$text-dark: #1a1a1a;
+$text-light: #666666;
+$white: #ffffff;
+$lighter-green: #8fd881;
+$dark-green: #22973a;
+$beige: #f4f4cb;
+
+
+// === MIXINS ===
+@mixin section-padding {
+  padding: 50px 10px;
+
+  @media (max-width: 768px) {
+    padding: 60px 20px;
+  }
+}
+
+@mixin container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+// === ANIMATIONS ===
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+// === MAIN STYLES ===
+.landing-page {
+  min-height: 100vh;
+  background: linear-gradient(135deg, $lighter-blue 0%, $white 50%, $light-blue 100%);
+}
+
+// === HERO SECTION ===
+
+.navbar{
+  position: fixed;
+  top: 10;
+  bottom: 10;
+  left: 0;
+  width: 100%;
+  height: 150px;
+
+  background:$beige;
+  z-index: 1000;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+//.hero-section {
+ // @include section-padding;
+ // padding-top: 30px;
+ // padding-bottom: 50px;
+ // background: linear-gradient(135deg, $beige 0%, $beige 100%);
+  //position: relative;
+  //z-index: 1;
+  //border-bottom: #1a1a1a;
+  //&::before {
+    //content: '';
+   // position: absolute;
+    //top: -50%;
+    //right: -20%;
+    //width: 800px;
+    //height: 800px;
+    //background: radial-gradient(circle, rgba(129, 218, 111, 0.1) 0%, transparent 70%);
+    //border-radius: 50%;
+    //animation: pulse 8s ease-in-out infinite;
+  //}
+//}
+
+.hero-content {
+  @include container;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+
+  @media (max-width: 968px) {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+}
+
+.hero-text {
+  animation: fadeInUp 0.8s ease-out;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 10px;
+  padding-top: 50px;
+  padding-right: 200px;
+  @media (max-width: 968px) {
+    justify-content: center;
+  }
+}
+
+.logo-icon {
+  font-size: 56px;
+  width: 56px;
+  height: 56px;
+  color: $primary-blue;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.brand-name {
+  font-family:inherit;
+  font-size: 55px;
+  font-weight: 800;
+  line-height: 1.2;
+  padding-bottom: 7px;
+  color: $dark-green;
+  margin: 0;
+  background: linear-gradient(135deg, $dark-green 0%, $dark-green 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+
+}
+
+.hero-title {
+  font-size: 60px;
+  font-weight: 600;
+  color: $dark-green;
+  margin: 0 0 20px 0;
+  line-height: 1.3;
+
+  @media (max-width: 768px) {
+    font-size: 32px;
+  }
+}
+
+.hero-description {
+  font-size: 18px;
+  color: $text-light;
+  line-height: 1.8;
+  margin: 0 0 40px 0;
+  max-width: 500px;
+
+  @media (max-width: 968px) {
+    margin: 0 auto 40px auto;
+  }
+}
+
+.hero-actions {
+  display: flex;
+  gap: 16px;
+
+  @media (max-width: 968px) {
+    justify-content: center;
+  }
+
+  @media (max-width: 480px) {
+    flex-direction: column;
+  }
+}
+
+.cta-button {
+  height: 56px;
+  padding: 0 32px;
+  font-size: 16px;
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(74, 144, 226, 0.3);
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(74, 144, 226, 0.4);
+  }
+
+  mat-icon {
+    margin-right: 8px;
+  }
+}
+
+.secondary-button {
+  height: 56px;
+  padding: 0 32px;
+  font-size: 16px;
+  font-weight: 600;
+  border: 2px solid $primary-blue;
+  color: $primary-blue;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background-color: $light-blue;
+    transform: translateY(-2px);
+  }
+
+  mat-icon {
+    margin-right: 8px;
+  }
+}
+
+// === FLOATING CARDS ===
+.hero-image {
+  position: relative;
+  
+  top:20px;
+  right: 55px;
+  //height: 400px;
+  display: flex;
+  gap:30px;
+  //animation: fadeInUp 0.8s ease-out 0.3s both;
+
+  @media (max-width: 968px) {
+    display: none;
+  }
+}
+
+.floating-card {
+ // position: absolute;
+ margin-left: 20px;
+  background: $white;
+  padding: 20px 24px;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  box-shadow: 0 8px 24px rgba(115, 197, 64, 0.12);
+  font-weight: 600;
+  color: $text-dark;
+  //animation: float 3s ease-in-out infinite;//uzrokuje plutanje
+
+  mat-icon {
+    font-size: 32px;
+    width: 32px;
+    height: 32px;
+    color: $dark-green;
+  }
+
+  &.card-4 {
+      animation-delay: 0s;
+    }
+
+  &.card-3 {
+   // bottom: 80px;
+    //left: 100px;
+    animation-delay: 1s;
+  }
+  &.card-5{
+    animation-delay: 2s;
+    cursor:pointer;
+  }  
+
+  &.card-1 {
+    //top: 50px;
+    //left: 50px;
+    animation-delay: 3s;
+  }
+
+  &.card-2 {
+    //top: 180px;
+    //right: 80px;
+    animation-delay: 4s;
+  }
+
+}
+
+// === FEATURES SECTION ===
+.features-section {
+  @include section-padding;
+
+
+  height: 1000px;
+}
+.features-section,
+.stats-section {
+  min-height: auto;
+}
+.features-section .section-header {
+  @include container;
+}
+.title{
+  padding-top: 350px;
+   font-size: 150px;
+  font-weight: 700;
+  color:$dark-green;
+  margin: 0 0 20px 0;
+  line-height: 1.3;
+
+  @media (max-width: 768px) {
+    font-size: 32px;
+  }
+}
+.section-header {
+  text-align: center;
+  margin-left: 50px;
+  margin-bottom: 60px;
+}
+
+.section-title {
+  font-size: 36px;
+  font-weight: 700;
+  color: $text-dark;
+  margin: 0 0 16px 0;
+
+  @media (max-width: 768px) {
+    font-size: 28px;
+  }
+}
+
+.section-subtitle {
+  font-size: 30px;
+  color: $lighter-green;
+  margin: 4;
+  text-shadow: 1px 1px;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+
+  @media (max-width: 968px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: 640px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.feature-card {
+  background: $white;
+  padding: 32px;
+  border-radius: 16px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+
+  &:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15) !important;
+
+    .feature-icon {
+      background: $primary-blue;
+      mat-icon {
+        color: $white;
+      }
+    }
+  }
+
+  h3 {
+    font-size: 20px;
+    font-weight: 600;
+    color: $text-dark;
+    margin: 20px 0 12px 0;
+  }
+
+  p {
+    font-size: 15px;
+    color: $text-light;
+    line-height: 1.6;
+    margin: 0;
+  }
+}
+
+.feature-icon {
+  width: 64px;
+  height: 64px;
+  background: $light-blue;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+
+  mat-icon {
+    font-size: 32px;
+    width: 32px;
+    height: 32px;
+    color: $primary-blue;
+    transition: all 0.3s ease;
+  }
+}
+
+// === STATS SECTION ===
+.stats-section {
+  @include section-padding;
+  background: linear-gradient(135deg, $lighter-green 0%, $lighter-green 100%);
+  color: $white;
+  height: 500px;
+}
+
+.stats-title{
+  text-align: center;
+}
+.s-title{
+
+  height: 100px;
+  font-size: 60px;
+  font-weight: 600;
+  color: $white;
+  margin: 0 0 20px 0;
+  line-height: 1.3;
+
+  @media (max-width: 768px) {
+    font-size: 32px;
+  }
+}
+.s-subtitle{
+  height: 70px;
+  font-size: 40px;
+  margin-left: 2px;
+
+}
+.stats-grid {
+  @include container;
+  padding-top: 30px;
+  padding-left: 400px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 40px;
+
+  @media (max-width: 968px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: 640px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.stat-card {
+  cursor: pointer;
+  height:150px;
+  text-align: center;
+  animation: fadeInUp 0.6s ease-out both;
+  background-color: $beige;
+  padding-top: 20px;
+  border-radius: 15px;
+
+  @for $i from 1 through 4 {
+    &:nth-child(#{$i}) {
+      animation-delay: #{$i * 0.1}s;
+    }
+  }
+}
+
+.stat-icon {
+  padding-bottom: 10px;
+  font-size: 48px;
+  width: 48px;
+  height: 48px;
+  color: $accent-blue;
+  margin-bottom: 16px;
+   color: $dark-green;
+}
+
+.stat-number {
+    padding-bottom: 10px;
+  font-size: 45px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: $dark-green;
+}
+
+.stat-label {
+  font-size: 16px;
+  opacity: 0.9;
+   color: $dark-green;
+}
+
+// === CTA SECTION ===
+.cta-section {
+ // @include section-padding;
+  height:550px;
+  background: $lighter-blue;
+}
+.selftest-part{
+  padding-top: 20px;
+}
+.cta-title{
+  color: $dark-green;
+  text-align: center;
+  font-weight: 600;
+  font-size: 45px;
+}
+.cta-content {
+  @include container;
+  text-align: center;
+  margin-top: 50px;
+  height: 120px;
+  max-width: 1200px;
+  padding-top: 50px;
+
+  p {
+    font-size: 18px;
+    color: $text-light;
+    margin: 0 0 40px 0;
+  }
+}
+.cta-stats-grid{
+  @include container;
+  padding-top: 40px;
+  padding-left: 600px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 40px;
+
+  @media (max-width: 968px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: 640px) {
+    grid-template-columns: 1fr;
+  }
+
+}
+.cta-stat-card{
+   cursor: pointer;
+  height:120px;
+  text-align: center;
+  animation: fadeInUp 0.6s ease-out both;
+  background-color: $dark-green;
+  padding-top: 40px;
+  border-radius: 15px;
+
+  @for $i from 1 through 4 {
+    &:nth-child(#{$i}) {
+      animation-delay: #{$i * 0.1}s;
+    }
+  }
+}
+.STJ-icon{
+  margin-right: 12px;
+    font-size: 50px;
+    width: 40px;
+    height: 70px;
+    color: $beige;
+
+}
+.stat-desc{
+  padding-bottom: 15px;
+  font-size: 30px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: $beige;
+}
+.cta-large-button {
+  height: 64px;
+  padding: 0 48px;
+  font-size: 18px;
+  font-weight: 600;
+  box-shadow: 0 8px 24px rgba(74, 144, 226, 0.3);
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 32px rgba(74, 144, 226, 0.4);
+  }
+
+  mat-icon {
+    margin-right: 12px;
+    font-size: 24px;
+    width: 24px;
+    height: 24px;
+  }
+}
