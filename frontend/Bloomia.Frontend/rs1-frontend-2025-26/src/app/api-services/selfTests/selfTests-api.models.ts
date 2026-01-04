@@ -10,6 +10,7 @@ export interface SelfTestAnswersCommandDto{
     questionId:number;
     questionName:string;
     rating: number;
+
 }
 
 export interface  ListAllSelfTestsQueryDto{
