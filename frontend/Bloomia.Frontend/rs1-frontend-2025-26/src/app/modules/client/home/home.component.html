@@ -1,0 +1,19 @@
+<p *ngIf="isLoading">Loading home page..</p>
+<p *ngIf="errorMessage">{{errorMessage}}</p>
+<div class="home-page">
+    <div class="basic-info">
+        <h1 class="name-info">Welocome {{client?.firstname}}! </h1>
+        <h2 class="text">Whats on your mind?</h2>
+    </div>
+
+    <div class="journal-container">
+        <h2 class="jrnl-text">Would you try journaling to make your day better?</h2>
+        <button class="button" (click)="showJournalDetails()">Journal time!</button>
+    </div>
+    
+
+    <div class="blog-container">
+        <h1>Blog timee!</h1>
+        <h2>See what our therapists say about various topics.</h2>
+    </div>
+</div>

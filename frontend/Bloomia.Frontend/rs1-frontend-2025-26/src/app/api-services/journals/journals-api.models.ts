@@ -10,3 +10,17 @@ export interface CreateJournalAnswerCommandDto{
     questionText:string;
     answerText:string;
 }
+export interface CreateJournalCommand{
+    title:string;
+    clientsAnswers:CreateJournalAnswerCommandDto[];
+}
+export interface ListQuestionsQuery{
+
+}
+export interface ListQuestionsQueryDto{
+    listOfQuestions:ListQuestions[];
+}
+export interface ListQuestions{
+    questionId:number;
+    question:string;
+}

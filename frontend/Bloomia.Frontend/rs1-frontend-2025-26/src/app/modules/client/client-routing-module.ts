@@ -8,6 +8,9 @@ import { ListTherapistsComponent } from './list-therapists/list-therapists.compo
 import { SelfTestsComponent } from './self-tests/self-tests.component';
 import { SelfTestDetailsComponent } from './self-tests/self-test-details/self-test-details.component';
 import { SubmitSelfTestComponent } from './self-tests/submit-self-test/submit-self-test.component';
+import { JournalsComponent } from './journals/journals.component';
+import { HomeComponent } from './home/home.component';
+import { JournalDetailsComponent } from './journals/journal-details/journal-details.component';
 const routes: Routes = [
     {
       path:'',
@@ -46,6 +49,18 @@ const routes: Routes = [
         {
           path:'self-tests/submit-self-test/:id',
           component:SubmitSelfTestComponent
+        },
+        {
+          path:'journals',
+          component:JournalsComponent
+        },
+        {path:'home',
+          component:HomeComponent
+
+        },
+        {
+          path:'journals/journal-details',
+          component:JournalDetailsComponent
         }
       ]
     }

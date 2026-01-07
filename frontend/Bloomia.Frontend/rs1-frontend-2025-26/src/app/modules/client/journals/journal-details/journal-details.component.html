@@ -1,0 +1,28 @@
+<p *ngIf="isLoading">Loading journal..</p>
+<p *ngIf="errorMessage">{{errorMessage}}</p>
+<div class="jorunal-page">
+
+
+    <div class="questions">
+        <div class="header">
+             <p class="title">Journal title:</p>
+         <input class="title-input" type="text" placeholder="unesite naslov journala." (input)="onTitleInput($event)">
+        </div>
+        
+         <div *ngFor="let q of questions.listOfQuestions"  class="question">
+             <p>{{q.question}}</p>
+             <input type="text" placeholder="unesite svoj odgovor." class="answer-input" (input)="onAnswerInput(q.questionId,$event)" [disabled]="!isInputValid">
+        </div>
+
+        <button class="button" (click)="submitJournal()" >Submit </button>
+    </div>
+   
+</div>
+<div class="overlay" *ngIf="journalSubmitted">
+    <div class="success-message">
+        <h2>Journal {{journalDTO?.journalName}} successfully submitted</h2>
+        <p class="desc">You can check your answers on your my-journals page.</p>
+        <button class="popupButton" (click)="journalSubmitted=false">OK</button>
+    </div>
+
+</div>
