@@ -1,0 +1,69 @@
+$text-color: #4A5759;
+$background-color: #B0C4B1;
+$light-color: #DEDBD2;
+
+$self-bg: #f7f7f5;
+$card-bg: #ffffff;
+$text-color: #4A5759;
+$accent: #B0C4B1;
+
+.home-page{
+    height: auto;
+  
+}
+.name-info{
+    color: $text-color;
+    font-weight: 600;
+    font-size: 70px;
+    text-shadow: 1px solid black;
+}
+.text{
+     color: $text-color;
+    font-weight: 600;
+    font-size: 40px;
+    padding-top: 20px;
+}
+.basic-info{
+        border-radius: 12px;
+        border: 1px solid $text-color;
+     text-align: center;
+     margin-left: 200px;
+     margin-right: 200px;
+     margin-top: 100px;
+    padding: 30px 15px;
+    background: rgb(222, 219, 210, 0.15);
+}
+.button{
+     background-color: #B0C4B1;
+    padding: 15px 32px;
+    text-align: center;
+    display: inline-block;
+    font-size: 18px;
+    font-weight: 600;
+margin-top: 20px;
+    cursor: pointer;
+    align-items: center;
+    border-radius: 12px;
+    width: 200px;
+    height: 70px;
+    color: #efebdf;
+   
+    box-shadow: 2px 2px #899389;
+}
+.jrnl-text{
+ 
+     color: $text-color;
+    font-weight: 500;
+    font-size: 25px;
+    padding-top: 20px;
+}
+.journal-container{
+     border-radius: 12px;
+        border: 1px solid $text-color;
+     text-align: center;
+     margin-left: 200px;
+     margin-right: 200px;
+     margin-top: 100px;
+    padding: 10px 15px;
+    background: rgb(222, 219, 210, 0.15);   
+}

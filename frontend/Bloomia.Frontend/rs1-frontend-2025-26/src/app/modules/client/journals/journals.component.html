@@ -1,0 +1,15 @@
+<p *ngIf="isLoading">Loading journal..</p>
+<p *ngIf="errorMessage">{{errorMessage}}</p>
+<div class="jorunal-page">
+
+
+    <div class="questions">
+         <h2 class="title">Journal</h2>
+         <div *ngFor="let q of questions.listOfQuestions"  class="question">
+             <p>{{q.question}}</p>
+        </div>
+
+        <button class="button" (click)="createAJournal()">Create a journal</button>
+    </div>
+   
+</div>
