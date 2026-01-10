@@ -52,10 +52,11 @@ namespace Bloomia.API.Controllers
 
         [Authorize(Roles = "CLIENT")]
         [HttpDelete("remove-all-saved-therapists")]
-        public async  Task<ActionResult<string>> RemoveAllSavedTherapistsForClient(RemoveAllSavedTherapistsCommand request, CancellationToken ct)
+        public async  Task<ActionResult<string>> RemoveAllSavedTherapistsForClient( CancellationToken ct)
         {
             var userClaim = User.FindFirst("id") ?? User.FindFirst(ClaimTypes.NameIdentifier);
             var userId = int.Parse(userClaim.Value);
+            var request = new RemoveAllSavedTherapistsCommand();
             request.UserId = userId;
             var result=await sender.Send(request, ct);
             return Ok(result);

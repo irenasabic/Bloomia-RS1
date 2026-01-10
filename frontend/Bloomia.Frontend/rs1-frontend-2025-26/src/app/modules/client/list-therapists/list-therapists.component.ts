@@ -3,7 +3,9 @@ import { TherapistsApiService } from '../../../api-services/therapists/therapist
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { ListTherapistsQueryDto, ListTherapistsRequest, ListTherapistsResponse } from '../../../api-services/therapists/therapists-api.models'; 
-
+import { SavedTherapistsApiService } from '../../../api-services/savedTherapists/savedTherapists-api.service';
+import { AddTherapistToSavedTherapistsCommandDto } from '../../../api-services/savedTherapists/savedTherapists-api.models';
+import { ToasterService } from '../../../core/services/toaster.service';
 
 @Component({
   selector: 'app-list-therapists',
@@ -15,6 +17,8 @@ export class ListTherapistsComponent implements OnInit {
 
   private router=inject(Router);
   private apiService=inject(TherapistsApiService);
+  private saveTherapistService=inject(SavedTherapistsApiService);
+  private toastService=inject(ToasterService);
 
   therapistsList:ListTherapistsQueryDto[]=[];
   total=0;
@@ -24,6 +28,7 @@ export class ListTherapistsComponent implements OnInit {
 
   request=new ListTherapistsRequest();
   private searchTimeout:any;
+  savedTherapistDto:AddTherapistToSavedTherapistsCommandDto|null=null;
 
   ngOnInit(): void {
     this.loadAllTherapists();
@@ -89,5 +94,17 @@ export class ListTherapistsComponent implements OnInit {
     this.searchTimeout=setTimeout(()=>{
       this.searchByName(value);
     }, 400);//400ms
+  }
+  addTherapistToSavedTherapists(t_Id:number){
+    this.saveTherapistService.addTherapistToSavedTherapists({therapistId:t_Id}).subscribe({
+      next:(response)=>{
+        this.savedTherapistDto=response;
+        this.toastService.success("Therapist saved!")
+      },
+      error:(err)=>{
+        this.toastService.error("Therapist already saved ");
+        console.error(err);
+      }
+    })
   }
 }

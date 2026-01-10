@@ -1,0 +1,59 @@
+<div *ngIf="isLoading">Loading your profile..</div>
+<div *ngIf="errorMessage">{{errorMessage}}</div>
+<div class="header-saved-therapists">
+    <h1 class="page-title">Your saved therapists</h1>
+    <p class="page-subtitle">
+      Here you can find all your saved therapists. You can remove them from your saved list if you want.
+    </p>
+</div>
+<div class="input-search">
+    <p>Search by fullname</p>
+    <input type="text" placeholder="enter the name of therapist" class="search-by-name" (input)="searchByName($event)">
+    
+</div>
+    <button class="button" (click)="openConfirmDialogToRemoveAllSavedTherapists()">Remove all</button>
+
+
+
+<div class="saved-therapists-container" *ngIf="isSearching===false">
+    <div class="saved-therapist-card" *ngFor="let st of savedTherapists">
+         <div class="remove-therapist" (click)="removeTherapistFromSavedTherapists(st.therapistId)">-</div>
+         <div class="basic-info">
+              <h1 class="fullname">{{st.fullname}}</h1>
+             <p>{{st.specialization}}</p>
+            <div class="rating" *ngIf="st.ratingAvg>0;else noRating">
+                <mat-icon *ngFor="let r of getStars(st.ratingAvg)" color="warn">star</mat-icon>
+                <mat-icon *ngFor="let e of getEmptyStars(st.ratingAvg)" color="warn">star_border</mat-icon>
+                <span class="rating-value">
+                    {{st.ratingAvg| number:'1.1-1'}}
+                </span>
+            </div>
+            <ng-template #noRating>
+                <span class="no-rating">No ratings yet</span>
+            </ng-template>
+        </div>
+
+    </div>
+</div>
+
+<div class="saved-therapists-container" *ngIf="isSearching==true">
+    <div class="saved-therapist-card" *ngFor="let st of searchedSavedTherapists">
+         <div class="remove-therapist" (click)="removeTherapistFromSavedTherapists(st.therapistId)">-</div>
+         <div class="basic-info">
+            <div>{{st.therapistProfilePictureUrl}}</div>
+              <h1 class="fullname">{{st.fullName}}</h1>
+             <p>{{st.specialization}}</p>
+            <div class="rating" *ngIf="st.ratingAvg>0;else noRating">
+                <mat-icon *ngFor="let r of getStars(st.ratingAvg)" color="warn">star</mat-icon>
+                <mat-icon *ngFor="let e of getEmptyStars(st.ratingAvg)" color="warn">star_border</mat-icon>
+                <span class="rating-value">
+                    {{st.ratingAvg| number:'1.1-1'}}
+                </span>
+            </div>
+            <ng-template #noRating>
+                <span class="no-rating">No ratings yet</span>
+            </ng-template>
+        </div>
+
+    </div>
+</div>

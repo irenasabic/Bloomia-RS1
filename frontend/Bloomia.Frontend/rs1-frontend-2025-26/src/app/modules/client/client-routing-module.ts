@@ -11,6 +11,7 @@ import { SubmitSelfTestComponent } from './self-tests/submit-self-test/submit-se
 import { JournalsComponent } from './journals/journals.component';
 import { HomeComponent } from './home/home.component';
 import { JournalDetailsComponent } from './journals/journal-details/journal-details.component';
+import { SavedTherapistsComponent } from './saved-therapists/saved-therapists.component';
 const routes: Routes = [
     {
       path:'',
@@ -61,6 +62,10 @@ const routes: Routes = [
         {
           path:'journals/journal-details',
           component:JournalDetailsComponent
+        },
+        {
+          path:'saved-therapists',
+          component:SavedTherapistsComponent
         }
       ]
     }
