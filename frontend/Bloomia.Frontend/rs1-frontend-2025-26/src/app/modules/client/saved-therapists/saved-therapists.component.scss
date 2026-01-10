@@ -1,0 +1,115 @@
+$text-color: #4A5759;
+$background-color: #B0C4B1;
+$light-color: #DEDBD2;
+
+$self-bg: #f7f7f5;
+$card-bg: #ffffff;
+$text-color: #4A5759;
+$accent: #B0C4B1;
+$card-border: #e2e8e2;
+$accent-soft: #b8cfc1;
+
+.saved-therapists-container{
+    margin-top: 130px;
+    border: 1px solid $accent-soft;
+    border-radius: 12px;
+    padding: 50px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+.saved-therapist-card{
+    background: linear-gradient( 150deg, #e8e8e5, #e0e3e1 );
+    margin-right: 23px;
+    width: 500px;
+    height: 400px;
+    padding: 24px;
+    border-radius: 20px;
+    box-shadow: 3px 3px 3px #aebaae;
+    transition: all 0.3s ease;
+    &:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.12);
+    cursor: pointer;
+  }
+}
+.basic-info{
+    margin-top: 240px;
+    text-align: center;
+}
+.rating{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap:4px;
+    
+}
+.rating-value{
+    margin-left: 5px;
+    font-size: 14px;
+}
+.no-rating{
+    font-size: 10px;
+    color: #999;
+}
+.remove-therapist{
+    font-size: 40px;
+    font-weight: 600;
+    margin-left: 460px;
+    padding-top: 20px;
+    cursor: pointer;
+    color: $text-color;
+}
+.button{
+    background-color: #B0C4B1;
+    padding: 15px 32px;
+    text-align: center;
+    display: inline-block;
+    font-size: 18px;
+    font-weight: 600;
+    margin-top: 20px;
+    cursor: pointer;
+    align-items: center;
+    border-radius: 12px;
+    width: 200px;
+    height: 70px;
+    color: #efebdf;
+   margin-left:850px;
+    box-shadow: 2px 2px #899389;
+}
+.search-by-name{
+ 
+    margin-left: 10px;
+    justify-content: center;
+    align-items: center;
+    width: 40%;
+    padding: 10px 40px;
+    height: 60px;
+    border-radius: 12px;
+    border: 1px solid #d1d9d5;
+    font-size: 1rem;
+    outline: none;
+    background-color: $self-bg;
+    &:focus {
+    border-color: #8fb5a5;
+    box-shadow: 0 0 0 3px rgba(143,181,165,0.25);
+  }
+}
+.header-saved-therapists{
+    text-align: center;
+    padding-top: 20px;
+    color: $text-color;
+}
+.input-search{
+    margin-top: 30px;
+    border: 1px solid $accent;
+    border-radius: 12px;
+       padding-top: 30px;
+    display: flex;
+       justify-content: center;
+    align-items: center;
+    width:1400px;
+    padding: 50px;
+margin-left: 190px;
+    background: linear-gradient( 150deg, #e8e8e5, #e0e3e1 );
+    box-shadow: 3px 3px 3px #aebaae;
+}
