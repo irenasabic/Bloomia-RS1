@@ -6,12 +6,14 @@ import { TherapistLayoutComponent } from './therapist-layout/therapist-layout.co
 import { HomeComponent } from './home/home.component';
 import { ProfileComponent } from './profile/profile.component';
 import {SharedModule} from '../shared/shared-module';
+import { MyClientsComponent } from './my-clients/my-clients.component';
 
 @NgModule({
   declarations: [
     TherapistLayoutComponent,
     HomeComponent,
-    ProfileComponent
+    ProfileComponent,
+    MyClientsComponent
   ],
   imports: [
     CommonModule,
