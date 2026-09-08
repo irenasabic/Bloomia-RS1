@@ -21,5 +21,6 @@ namespace Bloomia.Domain.Entities.Sessions
         public DateTime BookedAt { get; set; }
         public DateTime ScheduledAtUtc { get; set; }
         public List<ChatSessionEntity>? ChatSessions { get; set; } = new List<ChatSessionEntity>();
+        public List<AppointmentNotificationLogEntity> NotificationLogs { get; set; } = new();
     }
 }

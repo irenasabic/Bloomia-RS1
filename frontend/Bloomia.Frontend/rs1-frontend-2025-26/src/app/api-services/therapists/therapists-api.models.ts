@@ -32,30 +32,38 @@ export interface GetTherapistByIdQueryDto {
     specialization?: string | null;
     description?: string | null;
     ratingAvg: number;
+    documents: TherapistDocumentDto[];
     isVerified: boolean | null;
-    documentName?: string | null;
     therapyTypes: TherapyTypeDto[],
     availability: TherapistAvailabilityDto[];
 }
 
-export interface TherapyTypeDto {
+export interface TherapistDocumentDto {
     id: number;
-    name?: string | null;
+    documentType: string;
+    fileName: string;
+    filePath: string;
 }
 
 export interface TherapistAvailabilityDto {
     id: number;
     date: string;
     startTime: string;
-    isbooked?: boolean | null;
+    isBooked?: boolean | null;
 } 
 
+export interface TherapyTypeDto {
+    id: number;
+    name?: string | null;
+}
+
+
 export interface UpdateTherapistCommand {
+    firstname?: string | null;
+    lastname?: string | null;
     specialization?: string | null;
     description?: string | null;
-    documentId?: number | null;
     therapyTypeIds?: number[] | null;
-    profileImage?: number | null;
     email?: string | null;
     phoneNumber?: string | null;
     locationId?: number | null;

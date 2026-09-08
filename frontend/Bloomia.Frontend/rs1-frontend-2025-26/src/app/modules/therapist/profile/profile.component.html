@@ -5,17 +5,301 @@
         <p>Profile loading...</p>
     </div>
 
-    <div *ngIf="errorMessage && !isLoading" class="error-state">
-        <mat-icon>error</mat-icon>
-        <p>{{ errorMessage }}</p>
-        <button mat-raised-button color="primary" (click)="loadProfile()">Retry</button>
-    </div>
+    <mat-card *ngIf="errorMessage && !isLoading" class="error-card">
+        <div class="error-content">
+            <mat-icon>error</mat-icon>
+            <p>{{ errorMessage }}</p>
+            <button mat-raised-button class="primary-btn" (click)="loadProfile()">Retry</button>
+        </div>
+    </mat-card>
 
-    <div *ngIf="therapist && !isLoading">
-        <div class="profile-header">
-            <div class="profile-image-section">
-                <img src="assets/images/user.png" class="profile-image">
-            </div>
+    <div *ngIf="therapist && !isLoading" class="profile-content">
+        <div class="profile-grid">
+            <mat-card class="left-card">
+                <div class="image-wrapper" [class.editable]="isEditMode" [class.drag-active]="isEditMode && isDraggingProfileImage"
+                     (click)="triggerProfileImageInput(profileImageInput)" (dragover)="onProfileImageDragOver($event)" (dragleave)="onProfileImageDragLeave($event)" (drop)="onProfileImageDrop($event)">
+                    <img [src]="profileImageSrc" alt="Therapist profile" class="profile-image">
+                    <div *ngIf="isEditMode" class="image-overlay">
+                        <span class="image-plus">+</span>
+                    </div>
+                </div>
+
+                <input #profileImageInput type="file" accept="image/*" hidden (change)="onProfileImageSelected($event)">
+
+                <div class="basic-info">
+                    <div class="info-item">
+                        <span class="info-label">First and last name</span>
+                        <ng-container *ngIf="!isEditMode; else editNameBlock">
+                            <span class="info-value">{{ fullName }}</span>
+                        </ng-container>
+
+                        <ng-template #editNameBlock>
+                            <div class="name-edit-grid">
+                                <input type="text" class="edit-input compact-input" [(ngModel)]="editFirstname" placeholder="Ime">
+                                <input type="text" class="edit-input compact-input" [(ngModel)]="editLastname" placeholder="Prezime"> 
+                            </div>
+                        </ng-template>
+                    </div>
+                    
+                    <div class="info-item" *ngIf="therapist.username">
+                        <span class="info-label">Username</span>
+                        <span class="info-value">{{therapist.username}}</span>
+                    </div>
+
+                    <div class="info-item">
+                        <span class="info-label">Email</span>
+                        <ng-container *ngIf="!isEditMode; else editEmailBlock">
+                            <span class="info-value"> {{ therapist.email || '-' }} </span>
+                        </ng-container>
+
+                        <ng-template #editEmailBlock>
+                            <input type="email" class="edit-input compact-input" [(ngModel)]="editEmail" placeholder="Email">
+                        </ng-template>
+                    </div>
+
+                    <div class="info-item">
+                        <span class="info-label">Phone number</span>
+                        <ng-container *ngIf="!isEditMode; else editPhoneBlock">
+                            <span class="info-value">{{ therapist.phoneNumber || '-' }}</span>
+                        </ng-container>
+
+                        <ng-template #editPhoneBlock>
+                            <input type="text" class="edit-input compact-input" [(ngModel)]="editPhoneNumber" placeholder="Phone number">
+                        </ng-template>
+                    </div>
+
+                    <div class="info-item">
+                        <span class="info-label">Status</span>
+                        <span class="info-value">
+                            {{therapist.isVerified ? 'Verifikovan' : 'Nije verifikovan'}}
+                        </span>
+                    </div>
+                </div>
+
+                <div class="left-actions" *ngIf="!isEditMode">
+                    <button mat-raised-button class="primary-btn full-width" (click)="onEditProfile()">
+                        Edit profile
+                    </button>
+                </div>
+
+                <div class="upload-actions" *ngIf="isEditMode">
+                    <button mat-raised-button class="primary-btn full-width" (click)="saveProfileChanges()">
+                        Save changes
+                    </button>
+                    <button mat-stroked-button class="secondary-btn full-width" (click)="cancelEdit()">
+                        Cancel
+                    </button>
+                </div>
+            </mat-card>
+
+            <mat-card class="right-card">
+                <div class="header-section">
+                    <h1 class="therapist-name">{{ fullName }}</h1>
+                    <div class="rating-row">
+                        <div class="stars">
+                            <mat-icon *ngFor="let star of getStarsArray()">star</mat-icon>
+                            <mat-icon *ngIf="getStarsArray().length === 0">star_border</mat-icon>
+                        </div>
+                        <span class="rating-value">{{therapist.ratingAvg | number:'1.1-1'}}</span>
+                    </div>
+                </div>
+
+                <mat-divider></mat-divider>
+
+                <section class="section">
+                    <div class="section-title">Specialization</div>
+
+                    <ng-container *ngIf="!isEditMode; else editSpecializationBlock">
+                        <p class="section-text">
+                            {{ therapist.specialization || 'No specialization info available.' }}
+                        </p>
+                    </ng-container>
+
+                    <ng-template #editSpecializationBlock>
+                        <input class="edit-input" type="text" [(ngModel)]="editSpecialization" placeholder="Enter specialization">
+                    </ng-template>
+                </section>
+
+                <mat-divider></mat-divider>
+
+                <section class="section">
+                    <div class="section-title">Description</div>
+
+                    <ng-container *ngIf="!isEditMode; else editDescriptionBlock">
+                        <p class="section-text">
+                            {{ therapist.description || 'No description available.' }}
+                        </p>
+                    </ng-container>
+
+                    <ng-template #editDescriptionBlock>
+                        <textarea class="edit-textarea" rows="5" [(ngModel)]="editDescription" placeholder="Enter description"></textarea>
+                    </ng-template>
+                </section>
+
+                <mat-divider></mat-divider>
+
+                <section class="section">
+                    <div class="section-title">Therapy types</div>
+
+                    <ng-container *ngIf="!isEditMode; else editTherapyTypesBlock">
+                        <mat-chip-set *ngIf="therapyTypes.length > 0" class="chips-wrapper">
+                            <mat-chip *ngFor="let therapyType of therapyTypes">
+                                {{ therapyType }}
+                            </mat-chip>
+                        </mat-chip-set>
+
+                        <p *ngIf="therapyTypes.length===0" class="section-text empty-text">
+                            No therapy types added.
+                        </p>
+                    </ng-container>
+
+                    <ng-template #editTherapyTypesBlock>
+                        <div class="therapy-types-edit-list">
+                            <label class="therapy-type-option" *ngFor="let type of allTherapyTypes">
+                                <input type="checkbox" [checked]="isTherapyTypeSelected(type.id)"
+                                (change)="toggleTherapyType(type.id)">
+                                <span>{{ type.name }}</span>
+                            </label>
+                        </div>
+                    </ng-template>
+                </section>
+
+            <mat-divider></mat-divider>
+
+            <section class="section">
+                <div class="section-header-row">
+                    <div class="section-title">Files</div>
+
+                    <button *ngIf="isEditMode" type="button" class="add-document-btn" (click)="triggerDocumentInput(documentInput)">
+                        + Add file
+                    </button>
+                </div>
+
+                <input #documentInput type="file" accept=".pdf" hidden (change)="onUploadDocument($event)">
+
+                <div *ngIf="isEditMode" class="file-drop-zone" [class.drag-active]="isDraggingFile"
+                    (click)="triggerDocumentInput(documentInput)" (dragover)="onFileDragOver($event)" (dragleave)="onFileDragLeave($event)" (drop)="onFileDrop($event)">
+                    Drag and Drop PDF here
+                </div>
+
+                <div *ngIf="therapistDocuments.length > 0; else noDocumentsBlock" class="document-list">
+                    <div class="document-item clickable-document" *ngFor="let document of therapistDocuments" (click)="openExistingDocument(document)">
+                        <span class="document-name">{{ document.fileName }}</span>
+
+                        <button *ngIf="isEditMode" type="button" class="document-delete-btn" (click)="$event.stopPropagation(); deleteExistingDocument(document.id, document.fileName)">x</button>
+                    </div>
+                </div>
+
+                <ng-template #noDocumentsBlock>
+                    <p class="section-text empty-text">
+                        No files added.
+                    </p>
+                </ng-template>
+
+                <div *ngIf="isEditMode && selectedDocumentFile" class="document-item pending-document-item">
+                    <span class="document-name clickable-name" (click)="openPendingDocument()">
+                        {{ selectedDocumentFile.name }}
+                    </span>
+
+                    <button type="button" class="document-delete-btn" (click)="$event.stopPropagation(); removePendingDocument()">
+                        ×
+                    </button>
+                </div>
+            </section>
+
+            <mat-divider></mat-divider>
+
+            <section class="section">
+                <div class="section-title">My appointments</div>
+
+                <div *ngIf="workingTimes?.workingDates?.length" class="calendar-layout">
+                    <div class="calendar-panel">
+                    <div class="calendar-header">
+                        <button mat-icon-button type="button" class="month-nav-btn" (click)="previousMonth()">
+                        <mat-icon>chevron_left</mat-icon>
+                        </button>
+
+                        <div class="month-label">{{ currentMonthLabel }}</div>
+
+                        <button mat-icon-button type="button" class="month-nav-btn" (click)="nextMonth()">
+                        <mat-icon>chevron_right</mat-icon>
+                        </button>
+                    </div>
+
+                    <div class="weekdays-row">
+                        <div class="weekday-cell" *ngFor="let label of weekDayLabels">
+                        {{ label }}
+                        </div>
+                    </div>
+
+                    <div class="calendar-grid">
+                        <button
+                        type="button"
+                        *ngFor="let day of calendarDays"
+                        class="day-cell"
+                        [class.outside-month]="!day.inCurrentMonth"
+                        [class.today]="day.isToday"
+                        [class.selected]="day.isSelected"
+                        [class.has-slots]="day.hasSlots"
+                        [class.has-free]="day.hasFreeSlots"
+                        [class.has-booked]="day.hasBookedSlots"
+                        [disabled]="!day.hasSlots"
+                        (click)="selectDay(day)">
+                        <span class="day-number">{{ day.dayNumber }}</span>
+                        </button>
+                    </div>
+                    </div>
+
+                    <div class="slots-panel">
+                    <div class="slots-title">{{ selectedDateLabel }}</div>
+
+                    <div *ngIf="selectedDateSlots.length > 0" class="slots-list">
+                        <button
+                        type="button"
+                        class="slot-button"
+                        *ngFor="let slot of selectedDateSlots"
+                        [class.booked]="slot.isBooked"
+                        [class.free]="!slot.isBooked"
+                        (click)="slot.isBooked ? onBookedSlotClick(slot) : onSlotClick(slot)">
+
+                        <span class="slot-time">{{ formatTime(slot.startTime) }}</span>
+                        <span class="slot-status">
+                            {{ slot.isBooked ? 'Booked' : 'Available' }}
+                        </span>
+                        </button>
+                    </div>
+
+                    <p *ngIf="selectedDateKey && selectedDateSlots.length === 0" class="section-text empty-text">
+                        No available slots for selected date.
+                    </p>
+
+                    <p *ngIf="!selectedDateKey" class="section-text empty-text">
+                        Choose a date from the calendar.
+                    </p>
+                    </div>
+                </div>
+
+                <p *ngIf="!workingTimes?.workingDates?.length" class="section-text empty-text">
+                    No available appointments.
+                </p>
+            </section>
+            </mat-card>
         </div>
     </div>
+
+    <div class="document-viewer-backdrop" *ngIf="selectedDocumentUrl" (click)="closeDocumentViewer()">
+        <div class="document-viewer-modal" (click)="$event.stopPropagation()">
+            <div class="document-viewer-header">
+                <span class="document-viewer-title"> {{ selectedDocumentName }}</span>
+                <button type="button" class="document-viewer-close" (click)="closeDocumentViewer()">x</button>
+            </div>
+
+            <object [data]="selectedDocumentUrl" type="application/pdf" class="document-viewer-frame">
+                <div class="document-fallback-message">
+                    PDF preview not supported.
+                </div>
+            </object>
+        </div>
+    </div>
+
 </div>

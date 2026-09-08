@@ -1,5 +1,6 @@
 ﻿using Bloomia.Domain.Entities.Enums;
 using Bloomia.Domain.Entities.Sessions;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Bloomia.Application.Modules.Appointments.Command.Create
 {
-    public class CreateAppointmentCommandHandler(IAppDbContext context) : IRequestHandler<CreateAppoinmentCommand, CreateAppointmentCommandDto>
+    public class CreateAppointmentCommandHandler(IAppDbContext context, IEmailService emailService, ILogger<CreateAppointmentCommandHandler> logger) : IRequestHandler<CreateAppoinmentCommand, CreateAppointmentCommandDto>
     {
         public async Task<CreateAppointmentCommandDto> Handle(CreateAppoinmentCommand request, CancellationToken cancellationToken)
         {
@@ -71,6 +72,72 @@ namespace Bloomia.Application.Modules.Appointments.Command.Create
                 }
                 throw;
             }
+
+            var notificationLog = new AppointmentNotificationLogEntity
+            {
+                AppointmentId = appointment.Id,
+                RecipientEmail = client.User.Email ?? string.Empty,
+                NotificationType = AppointmentNotificationsType.BookingConfirmation,
+                Status = AppointmentNotificationStatus.Pending,
+                CreatedAtUtc = DateTime.UtcNow
+            };
+
+            context.AppointmentNotificationLogs.Add(notificationLog);
+            await context.SaveChangesAsync(cancellationToken);
+
+            try
+            {
+                var clientEmail = client.User.Email;
+                var clientName = client.User.Fullname ?? $"{client.User.Firstname} {client.User.Lastname}";
+                var therapistName = availableTime.Therapist.User.Fullname ??
+                                    $"{availableTime.Therapist.User.Firstname} {availableTime.Therapist.User.Lastname}";
+
+                if(!string.IsNullOrWhiteSpace(clientEmail))
+                {
+                    await emailService.SendAppointmentBookingConfirmationAsync(
+                        toEmail: clientEmail,
+                        clientName: clientName,
+                        therapistName: therapistName,
+                        appointmentDate: availableTime.Date,
+                        appointmentTime: availableTime.StartTime,
+                        sessionType: appointment.SessionType.ToString(),
+                        ct: cancellationToken);
+
+                    notificationLog.Status = AppointmentNotificationStatus.Sent;
+                    notificationLog.SentAtUtc = DateTime.UtcNow;
+                    notificationLog.ErrorMessage = null;
+
+                    await context.SaveChangesAsync(cancellationToken);
+                }
+                else
+                {
+                    context.AppointmentNotificationLogs.Add(new AppointmentNotificationLogEntity
+                    {
+                        AppointmentId = appointment.Id,
+                        RecipientEmail = string.Empty,
+                        NotificationType = AppointmentNotificationsType.BookingConfirmation,
+                        Status = AppointmentNotificationStatus.Failed,
+                        CreatedAtUtc = DateTime.UtcNow,
+                        ErrorMessage = "Client email is missing."
+                    });
+
+                    await context.SaveChangesAsync(cancellationToken);
+
+                    logger.LogWarning(
+                        "Booking confirmation email skipped for appointment {AppointmentId} because client email is missing.",
+                        appointment.Id);
+                }
+            }
+            catch(Exception ex)
+            {
+                notificationLog.Status = AppointmentNotificationStatus.Failed;
+                notificationLog.ErrorMessage = ex.Message;
+
+                logger.LogError(ex,
+                                "Failed to send booking confirmation email for appointment {AppointmentId} and client {ClientId}",
+                                appointment.Id, client.Id);
+            }
+             
             var dto = new CreateAppointmentCommandDto
             {
                 Note = "You have successfully booked an appointment.",

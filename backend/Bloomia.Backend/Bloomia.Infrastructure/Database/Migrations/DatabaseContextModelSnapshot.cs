@@ -95,26 +95,33 @@ namespace Bloomia.Infrastructure.Database.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("DocumentType")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("DocumentType")
+                        .HasColumnType("int");
 
                     b.Property<string>("FileExtension")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
                     b.Property<string>("FileName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<string>("FilePath")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<int>("TherapistId")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("UploadedAt")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("TherapistId");
 
                     b.ToTable("Documents", (string)null);
                 });
@@ -793,6 +800,51 @@ namespace Bloomia.Infrastructure.Database.Migrations
                     b.ToTable("Appointments", (string)null);
                 });
 
+            modelBuilder.Entity("Bloomia.Domain.Entities.Sessions.AppointmentNotificationLogEntity", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("AppointmentId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedAtUtc")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("ErrorMessage")
+                        .HasMaxLength(2000)
+                        .HasColumnType("nvarchar(2000)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("ModifiedAtUtc")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("NotificationType")
+                        .HasColumnType("int");
+
+                    b.Property<string>("RecipientEmail")
+                        .IsRequired()
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<DateTime?>("SentAtUtc")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AppointmentId");
+
+                    b.ToTable("AppointmentNotificationLogs");
+                });
+
             modelBuilder.Entity("Bloomia.Domain.Entities.Sessions.ChatSessionEntity", b =>
                 {
                     b.Property<int>("Id")
@@ -907,9 +959,6 @@ namespace Bloomia.Infrastructure.Database.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("DocumentId")
-                        .HasColumnType("int");
-
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
@@ -931,9 +980,6 @@ namespace Bloomia.Infrastructure.Database.Migrations
                         .HasColumnName("isVerified");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("DocumentId")
-                        .IsUnique();
 
                     b.HasIndex("UserId")
                         .IsUnique();
@@ -1043,6 +1089,17 @@ namespace Bloomia.Infrastructure.Database.Migrations
                         .IsRequired();
 
                     b.Navigation("Admin");
+                });
+
+            modelBuilder.Entity("Bloomia.Domain.Entities.Basics.DocumentEntity", b =>
+                {
+                    b.HasOne("Bloomia.Domain.Entities.TherapistEntity", "Therapist")
+                        .WithMany("Documents")
+                        .HasForeignKey("TherapistId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Therapist");
                 });
 
             modelBuilder.Entity("Bloomia.Domain.Entities.ClientEntity", b =>
@@ -1248,6 +1305,17 @@ namespace Bloomia.Infrastructure.Database.Migrations
                     b.Navigation("TherapistAvailability");
                 });
 
+            modelBuilder.Entity("Bloomia.Domain.Entities.Sessions.AppointmentNotificationLogEntity", b =>
+                {
+                    b.HasOne("Bloomia.Domain.Entities.Sessions.AppointmentEntity", "Appointment")
+                        .WithMany("NotificationLogs")
+                        .HasForeignKey("AppointmentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Appointment");
+                });
+
             modelBuilder.Entity("Bloomia.Domain.Entities.Sessions.ChatSessionEntity", b =>
                 {
                     b.HasOne("Bloomia.Domain.Entities.Sessions.AppointmentEntity", "Appointment")
@@ -1297,19 +1365,11 @@ namespace Bloomia.Infrastructure.Database.Migrations
 
             modelBuilder.Entity("Bloomia.Domain.Entities.TherapistEntity", b =>
                 {
-                    b.HasOne("Bloomia.Domain.Entities.Basics.DocumentEntity", "Document")
-                        .WithOne()
-                        .HasForeignKey("Bloomia.Domain.Entities.TherapistEntity", "DocumentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("Bloomia.Domain.Entities.Identity.UserEntity", "User")
                         .WithOne()
                         .HasForeignKey("Bloomia.Domain.Entities.TherapistEntity", "UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Document");
 
                     b.Navigation("User");
                 });
@@ -1386,6 +1446,8 @@ namespace Bloomia.Infrastructure.Database.Migrations
                 {
                     b.Navigation("ChatSessions");
 
+                    b.Navigation("NotificationLogs");
+
                     b.Navigation("Review");
                 });
 
@@ -1402,6 +1464,8 @@ namespace Bloomia.Infrastructure.Database.Migrations
             modelBuilder.Entity("Bloomia.Domain.Entities.TherapistEntity", b =>
                 {
                     b.Navigation("Availability");
+
+                    b.Navigation("Documents");
 
                     b.Navigation("MyTherapyTypesList");
 

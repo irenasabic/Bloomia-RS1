@@ -8,6 +8,7 @@ using Bloomia.Domain.Entities.Sessions;
 using Bloomia.Infrastructure;
 using Bloomia.Infrastructure.Common;
 using Bloomia.Infrastructure.Services;
+using Bloomia.Infrastructure.Settings;
 using FirebaseAdmin;
 using Google.Apis.Auth.OAuth2;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -73,6 +74,11 @@ public partial class Program
                 .AddInfrastructure(builder.Configuration, builder.Environment)
                 .AddApplication();
 
+            builder.Services.Configure<EmailSettings>(builder.Configuration.GetSection("EmailSettings"));
+            builder.Services.AddScoped<IEmailService, EmailService>();
+            builder.Services.AddScoped<IAppointmentReminderService, AppointmentReminderService>();
+            builder.Services.AddHostedService<AppointmentReminderBackgroundService>();
+            builder.Services.AddScoped<IFileStorageService, LocalFileStorageService>();
             builder.Services.AddExceptionHandler<MarketExceptionHandler>();
             builder.Services.AddProblemDetails();
             builder.Services.AddSignalR();
@@ -121,6 +127,7 @@ public partial class Program
 
             app.UseHttpsRedirection();
             app.UseCors("AllowAngularDev");
+            app.UseStaticFiles();
             app.UseAuthentication(); 
             app.UseAuthorization();
             app.UseRateLimiter();

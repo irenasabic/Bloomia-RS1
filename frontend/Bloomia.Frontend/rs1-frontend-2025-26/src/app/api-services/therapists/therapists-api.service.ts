@@ -6,6 +6,7 @@ import { ListTherapistsRequest, ListTherapistsResponse, GetTherapistByIdQueryDto
     ChangeTherapistPasswordCommand, UpdateTherapistCommand
  } from "./therapists-api.models";
  import { buildHttpParams } from "../../core/models/build-http-params";
+import { observableToBeFn } from "rxjs/internal/testing/TestScheduler";
 
 @Injectable({
     providedIn: 'root'
@@ -13,6 +14,7 @@ import { ListTherapistsRequest, ListTherapistsResponse, GetTherapistByIdQueryDto
 
 export class TherapistsApiService {
     private readonly baseUrl = `${environment.apiUrl}/api/therapists`;
+    private readonly availabilityBaseUrl = `${environment.apiUrl}/api/TherapistAvailability`;
     private http = inject(HttpClient);
 
     list(request?: ListTherapistsRequest): Observable<ListTherapistsResponse> {
@@ -29,7 +31,30 @@ export class TherapistsApiService {
         return this.http.put<void>(`${this.baseUrl}/${id}`, payload);
     }
 
+    uploadProfileImage(file: File): Observable<{ note: string; profileImage: string }> {
+        const formData = new FormData();
+        formData.append('file', file);
+
+        return this.http.post<{ note: string; profileImage: string }>(
+            `${environment.apiUrl}/api/users/upload-profile-image`,
+            formData
+        );
+    }
+
+    uploadTherapistDocument(file: File, documentType: number): Observable<any> {
+        const formData = new FormData();
+        formData.append('file', file);
+        formData.append('documentType', documentType.toString());
+
+        return this.http.post<any>(`${this.baseUrl}/upload-document`, formData);
+    }
+
+    deleteTherapistDocument(documentId: number): Observable<void> {
+        return this.http.delete<void>(`${this.baseUrl}/documents/${documentId}`);
+    }
+
     changePassword(id:number, payload: ChangeTherapistPasswordCommand): Observable<void> {
         return this.http.put<void>(`${this.baseUrl}/${id}/change-password`, payload);
     }
+
 }
