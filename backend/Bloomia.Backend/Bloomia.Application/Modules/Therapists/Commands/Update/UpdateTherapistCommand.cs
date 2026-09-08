@@ -15,8 +15,6 @@ namespace Bloomia.Application.Modules.Therapists.Commands.Update
         public int? DocumentId { get; set; }
         public List<int> TherapyTypeIds { get; set; }
 
-        //treba update i Availability listu
-
 
         public string? ProfileImage { get; set; }
         public string? Email { get; set; }

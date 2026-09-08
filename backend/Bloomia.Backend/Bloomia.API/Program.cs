@@ -13,6 +13,8 @@ using Google.Apis.Auth.OAuth2;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.OpenApi.Models;
 using Serilog;
+using Microsoft.AspNetCore.RateLimiting;
+using System.Threading.RateLimiting;
 
 public partial class Program
 {
@@ -76,6 +78,18 @@ public partial class Program
             builder.Services.AddSignalR();
             builder.Services.AddScoped<IPushNotificationService, PushNotificationService>();
             builder.Services.AddScoped<IChatNotifier, ChatNotifier>();
+            builder.Services.AddRateLimiter(options =>
+            {
+                options.AddFixedWindowLimiter("LoginPolicy", opt =>
+                {
+                    opt.PermitLimit = 5;
+                    opt.Window = TimeSpan.FromMinutes(1);
+                    opt.QueueLimit = 0;
+                    opt.QueueProcessingOrder = QueueProcessingOrder.OldestFirst;
+                });
+
+                options.RejectionStatusCode = StatusCodes.Status429TooManyRequests;
+            });
 
             builder.Services.AddCors(options =>
             {
@@ -109,6 +123,7 @@ public partial class Program
             app.UseCors("AllowAngularDev");
             app.UseAuthentication(); 
             app.UseAuthorization();
+            app.UseRateLimiter();
 
             app.MapControllers();
             app.MapHub<ChatHub>("/chat");

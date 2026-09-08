@@ -16,7 +16,7 @@ namespace Bloomia.Infrastructure.Database.Seeders
     {
         public static async Task SeedAsync(DatabaseContext context)
         {
-            // Osiguraj da baza postoji (bez migracija)
+            
             await context.Database.EnsureCreatedAsync();
 
             await SeedSelfTestsAndSelfTestQuestions(context);
@@ -35,7 +35,6 @@ namespace Bloomia.Infrastructure.Database.Seeders
             if (await context.Articles.AnyAsync())
                 return;
 
-            //admin kao autor article-a
             var admin = await context.Admins
                 .FirstOrDefaultAsync();
             if(admin == null) 
@@ -329,10 +328,6 @@ namespace Bloomia.Infrastructure.Database.Seeders
             if(await context.Users.AnyAsync())
                 return;
 
-            //ako nema usera dodaj ih
-            //pronadji uloge u bazi 
-            //ako ne postoje dodaj ih
-            //zatim ih ponovo ucitavamo 
             var adminRole = await context.Roles.FirstOrDefaultAsync(x => x.RoleName == "ADMIN");
             var clientRole=await context.Roles.FirstOrDefaultAsync(x=>x.RoleName=="CLIENT");
             var therapistRole=await context.Roles.FirstOrDefaultAsync(x=>x.RoleName=="THERAPIST");

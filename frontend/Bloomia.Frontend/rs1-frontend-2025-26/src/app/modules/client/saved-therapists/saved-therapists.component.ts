@@ -29,8 +29,6 @@ export class SavedTherapistsComponent extends BaseListPagedComponent<ListSavedTh
   pageSize=10;
   totalCount=0;
 
- // isLoading = false;
-  //errorMessage: string | null = null;
   isSearching=false;
 
   removeSavedTherapistMessage:string|null=null;
@@ -38,7 +36,9 @@ export class SavedTherapistsComponent extends BaseListPagedComponent<ListSavedTh
 
   therapist:ListSavedTherapistInfoDto|null=null;
   searchedSavedTherapists:GetSavedTherapistByNameResponse|null=null;
-  
+
+  minRatingError:string|null=null;
+
   constructor(){
     super();
     this.request=new ListSavedTherapistsQuery();
@@ -65,9 +65,6 @@ export class SavedTherapistsComponent extends BaseListPagedComponent<ListSavedTh
     });
   }
 
-
-//list terapeuta, paging
-
   getStars(rating:number): number[]{
       return Array(Math.floor(rating)).fill(0);
   }
@@ -76,12 +73,12 @@ export class SavedTherapistsComponent extends BaseListPagedComponent<ListSavedTh
   }
   removeTherapistFromSavedTherapists(therapistId:number){
 
-    //mogu ga pronaci u saved therapists
     this.savedTherapists.forEach(element => {
         if(element.therapistId==therapistId){
             this.therapist=element;
         }
     });
+
     this.apiService.removeSavedTherapist(therapistId).subscribe({
       next:(response)=>{
         this.removeSavedTherapistMessage=response;
@@ -93,8 +90,6 @@ export class SavedTherapistsComponent extends BaseListPagedComponent<ListSavedTh
         console.error(err);
       }
     });
-    //kako promjeniti prikaz liste spremljenih terapeuta odmah nakon sto obrisemo nekog? 
-    // samo ucitamo ponovo listu spremljenih terapeuta ali kazemo bez tog therapistId koji je obrisan. gore u next bloku
   }
 
   openConfirmDialogToRemoveAllSavedTherapists(){
@@ -140,11 +135,51 @@ export class SavedTherapistsComponent extends BaseListPagedComponent<ListSavedTh
     });
   }
 
+  applyExtraFilters():void{
+    this.request.paging.page=1;
+    this.loadPagedData();
+  }
+
+  onSpecializationFilterInput(event:Event):void{
+    const value=(event.target as HTMLInputElement).value;
+    this.request.specialization=value?.trim() || null;
+    this.applyExtraFilters();
+  }
+
+  onMinRatingFilterInput(event:Event):void{
+    const value=(event.target as HTMLInputElement).value;
+
+    if(!value){
+      this.minRatingError=null;
+      this.request.minRating=null;
+      this.applyExtraFilters();
+      return;
+    }
+
+    const num=Number(value);
+    if(isNaN(num) || num<1 || num>5){
+      this.minRatingError='Ocjena mora biti izmedju 1 i 5';
+      this.request.minRating=null;
+      return;
+    }
+
+    this.minRatingError=null;
+    this.request.minRating=num;
+    this.applyExtraFilters();
+  }
+
+  onTherapyTypeFilterInput(event:Event):void{
+    const value=(event.target as HTMLInputElement).value;
+    this.request.therapyType=value?.trim() || null;
+    this.applyExtraFilters();
+  }
+
+  toggleSortByRating():void{
+    this.request.sortByRatingDesc=!this.request.sortByRatingDesc;
+    this.applyExtraFilters();
+  }
+
   searchByName(event:Event){
-    //moram proslijediti event input
-    //event ce biti tipa string
-    //i taj string koji uzmemo iz inputa saljemo kao request
-    //svaki put on input se poziva metoda
     const searchInput=(event.target as HTMLInputElement).value;
     if(searchInput.length===0){
       this.isSearching=false;
