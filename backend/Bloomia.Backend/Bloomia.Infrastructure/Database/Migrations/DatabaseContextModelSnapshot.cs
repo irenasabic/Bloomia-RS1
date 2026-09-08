@@ -975,8 +975,9 @@ namespace Bloomia.Infrastructure.Database.Migrations
                     b.Property<int>("UserId")
                         .HasColumnType("int");
 
-                    b.Property<bool>("isVerified")
-                        .HasColumnType("bit");
+                    b.Property<bool>("IsVerified")
+                        .HasColumnType("bit")
+                        .HasColumnName("isVerified");
 
                     b.HasKey("Id");
 
