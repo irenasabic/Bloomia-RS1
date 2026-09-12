@@ -23,6 +23,7 @@ interface CalendarDayVm {
   hasSlots: boolean;
   hasFreeSlots: boolean;
   hasBookedSlots: boolean;
+  isPast: boolean;
 }
 
 @Component({
@@ -90,6 +91,10 @@ export class ProfileComponent extends BaseComponent implements OnInit {
       therapyTypes: this.therapyTypesApi.list()
     }).subscribe({
       next: (result) => {
+
+        console.log('WORKING TIMES:', result.workingTimes);
+        console.log('WORKING DATES:', result.workingTimes?.workingDates);
+
         this.therapist = result.profile;
         this.workingTimes = result.workingTimes;
         this.allTherapyTypes = result.therapyTypes;
@@ -254,7 +259,9 @@ get selectedDateSlots(): WorkingTimeSlotsDto[] {
 }
 
 selectDay(day: CalendarDayVm): void {
-  if (!day.hasSlots) return;
+
+  if(day.isPast)
+    return;
 
   this.selectedDateKey = day.dateKey;
 
@@ -295,6 +302,13 @@ selectDay(day: CalendarDayVm): void {
   private buildCalendarDay(date: Date, inCurrentMonth: boolean): CalendarDayVm {
     const dateKey = this.toDateKey(date);
     const slots = this.getSlotsForDate(dateKey);
+    const today = new Date();
+    today.setHours(0,0,0,0);
+
+    const currentDate = new Date(date);
+    currentDate.setHours(0,0,0,0);
+
+    const isPast = currentDate < today;
 
     return {
       date,
@@ -306,6 +320,7 @@ selectDay(day: CalendarDayVm): void {
       hasSlots: slots.length > 0,
       hasFreeSlots: slots.some(slot => !slot.isBooked),
       hasBookedSlots: slots.some(slot => slot.isBooked),
+      isPast
     };
   }
 

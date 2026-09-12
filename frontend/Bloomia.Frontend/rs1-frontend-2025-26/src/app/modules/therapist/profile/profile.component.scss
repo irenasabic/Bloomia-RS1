@@ -550,7 +550,7 @@ mat-chip {
   border: none;
   border-radius: 50%;
   background: transparent;
-  color: rgba(74, 87, 89, 0.42);
+  color: $text-color;
   font-size: 15px;
   font-weight: 700;
   display: flex;
@@ -562,12 +562,14 @@ mat-chip {
   transition: transform 0.15s ease, background-color 0.15s ease, box-shadow 0.15s ease;
 
   &:disabled {
+    color: rgba(74, 87, 89, 0.30);
     cursor: default;
     opacity: 1;
   }
 
   &:not(:disabled):hover {
     transform: scale(1.04);
+    background: rgba(176, 196, 177, 0.22);
   }
 }
 

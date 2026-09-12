@@ -212,7 +212,7 @@
             <section class="section">
                 <div class="section-title">My appointments</div>
 
-                <div *ngIf="workingTimes?.workingDates?.length" class="calendar-layout">
+                <div class="calendar-layout">
                     <div class="calendar-panel">
                     <div class="calendar-header">
                         <button mat-icon-button type="button" class="month-nav-btn" (click)="previousMonth()">
@@ -243,7 +243,7 @@
                         [class.has-slots]="day.hasSlots"
                         [class.has-free]="day.hasFreeSlots"
                         [class.has-booked]="day.hasBookedSlots"
-                        [disabled]="!day.hasSlots"
+                        [disabled]="day.isPast"
                         (click)="selectDay(day)">
                         <span class="day-number">{{ day.dayNumber }}</span>
                         </button>
@@ -279,9 +279,6 @@
                     </div>
                 </div>
 
-                <p *ngIf="!workingTimes?.workingDates?.length" class="section-text empty-text">
-                    No available appointments.
-                </p>
             </section>
             </mat-card>
         </div>
