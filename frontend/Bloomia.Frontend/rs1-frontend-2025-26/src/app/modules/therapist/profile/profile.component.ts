@@ -12,6 +12,8 @@ import { environment } from '../../../../environments/environment';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { DialogHelperService } from '../../shared/services/dialog-helper.service';
 import { DialogButton } from '../../shared/models/dialog-config.model';
+import { FormBuilder, Validators } from '@angular/forms';
+import { ToasterService } from '../../../core/services/toaster.service';
 
 interface CalendarDayVm {
   date: Date;
@@ -40,7 +42,14 @@ export class ProfileComponent extends BaseComponent implements OnInit {
   private therapyTypesApi = inject(TherapyTypesApiService);
   private sanitizier = inject(DomSanitizer);
   private dialogHelper = inject(DialogHelperService);
+  private fb = inject(FormBuilder);
+  private toaster = inject(ToasterService);
 
+  slotForm = this.fb.group({
+    startTime: ['', Validators.required]
+  });
+
+  timeOptions: string[] = [];
   therapist: GetTherapistByIdQueryDto | null = null;
   workingTimes: ListMyWorkingDatesAndTimesResponse | null = null;
 
@@ -72,6 +81,18 @@ export class ProfileComponent extends BaseComponent implements OnInit {
   
   ngOnInit(): void {
     this.loadProfile();
+    this.generateTimeOptions();
+  }
+
+  private generateTimeOptions(): void {
+    for(let hour = 8; hour < 17; hour++) {
+      for(let minute = 0; minute < 60; minute += 60) {
+        const h = hour.toString().padStart(2, '0');
+        const m = minute.toString().padStart(2, '0');
+
+        this.timeOptions.push(`${h}:${m}`);
+      }
+    }
   }
 
   loadProfile(): void {
@@ -128,6 +149,7 @@ export class ProfileComponent extends BaseComponent implements OnInit {
 
     reader.readAsDataURL(file);
   }
+  
 
   onProfileImageDragOver(event: DragEvent): void {
     if(!this.isEditMode)
@@ -218,6 +240,38 @@ export class ProfileComponent extends BaseComponent implements OnInit {
 
   get therapistDocuments() {
     return this.therapist?.documents || [];
+  }
+
+  addSlot(): void {
+    console.log('FORM:', this.slotForm.value);
+  console.log('VALID:', this.slotForm.valid);
+  console.log('ERRORS:', this.slotForm.get('startTime')?.errors);
+    if(this.slotForm.invalid || !this.selectedDateKey) {
+      this.slotForm.markAllAsTouched();
+      return;
+    }
+
+    const command = {
+      availableDate: this.selectedDateKey,
+      startTime: this.slotForm.value.startTime ?? ''
+    }
+
+    this.therapistAvailabilityApi.create(command).subscribe({
+      next: (response) => {
+        this.toaster.success(response.note || 'Time slot added successfully.');
+
+        this.slotForm.reset();
+
+        this.loadProfile();
+      },
+      error: (err) => {
+        console.error(err);
+
+        this.toaster.error(err?.error?.message || 'Failed to add time slot.');
+      }
+      
+    })
+
   }
 
   get currentMonthLabel(): string {

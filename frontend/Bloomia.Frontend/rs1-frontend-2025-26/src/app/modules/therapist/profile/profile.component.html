@@ -251,31 +251,63 @@
                     </div>
 
                     <div class="slots-panel">
-                    <div class="slots-title">{{ selectedDateLabel }}</div>
+                        <div class="slots-title">{{ selectedDateLabel }}</div>
 
-                    <div *ngIf="selectedDateSlots.length > 0" class="slots-list">
-                        <button
-                        type="button"
-                        class="slot-button"
-                        *ngFor="let slot of selectedDateSlots"
-                        [class.booked]="slot.isBooked"
-                        [class.free]="!slot.isBooked"
-                        (click)="slot.isBooked ? onBookedSlotClick(slot) : onSlotClick(slot)">
+                        <div *ngIf="selectedDateSlots.length > 0" class="slots-list">
+                            <button
+                            type="button"
+                            class="slot-button"
+                            *ngFor="let slot of selectedDateSlots"
+                            [class.booked]="slot.isBooked"
+                            [class.free]="!slot.isBooked"
+                            (click)="slot.isBooked ? onBookedSlotClick(slot) : onSlotClick(slot)">
 
-                        <span class="slot-time">{{ formatTime(slot.startTime) }}</span>
-                        <span class="slot-status">
-                            {{ slot.isBooked ? 'Booked' : 'Available' }}
-                        </span>
-                        </button>
-                    </div>
+                            <span class="slot-time">{{ formatTime(slot.startTime) }}</span>
+                            <span class="slot-status">
+                                {{ slot.isBooked ? 'Booked' : 'Available' }}
+                            </span>
+                            </button>
+                        </div>
 
-                    <p *ngIf="selectedDateKey && selectedDateSlots.length === 0" class="section-text empty-text">
-                        No available slots for selected date.
-                    </p>
+                        <p *ngIf="selectedDateKey && selectedDateSlots.length === 0" class="section-text empty-text">
+                            No time slots added for this date.
+                        </p>
 
-                    <p *ngIf="!selectedDateKey" class="section-text empty-text">
-                        Choose a date from the calendar.
-                    </p>
+                        <p *ngIf="!selectedDateKey" class="section-text empty-text">
+                            Choose a date from the calendar.
+                        </p>
+
+                        <form *ngIf="selectedDateKey"
+                               [formGroup]="slotForm"
+                               (ngSubmit)="addSlot()"
+                               class="add-slot-panel">
+
+                               <mat-form-field appearance="outline">
+                                <mat-label>Start time</mat-label>
+
+                                <mat-select formControlName="startTime">
+                                    <mat-option *ngFor="let time of timeOptions" [value]="time">
+                                        {{ time }}
+                                    </mat-option>
+
+                                </mat-select>
+
+                                 <mat-error *ngIf="slotForm.get('startTime')?.hasError('required')">
+                                    Start time is required.
+                                 </mat-error>
+
+                               </mat-form-field>
+
+                               <button
+                                 mat-raised-button 
+                                 type="submit"
+                                 class="primary-btn"
+                                 [disabled]="slotForm.invalid">
+                                 <mat-icon>add</mat-icon>
+                                    Add slot
+                                </button>
+
+                        </form>
                     </div>
                 </div>
 
