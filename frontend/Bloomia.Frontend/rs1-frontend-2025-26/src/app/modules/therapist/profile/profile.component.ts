@@ -242,10 +242,25 @@ export class ProfileComponent extends BaseComponent implements OnInit {
     return this.therapist?.documents || [];
   }
 
+  isPastTime(): boolean {
+    if(!this.selectedDateKey || !this.slotForm.value.startTime)
+      return false;
+
+    const today = this.toDateKey(new Date());
+
+    if(this.selectedDateKey !== today)
+      return false;
+
+    const now = new Date();
+
+    const currentTime =
+    `${String(now.getHours()).padStart(2, '0')}:` +
+    `${String(now.getMinutes()).padStart(2, '0')}`;
+
+    return this.slotForm.value.startTime <= currentTime;
+  }
+
   addSlot(): void {
-    console.log('FORM:', this.slotForm.value);
-  console.log('VALID:', this.slotForm.valid);
-  console.log('ERRORS:', this.slotForm.get('startTime')?.errors);
     if(this.slotForm.invalid || !this.selectedDateKey) {
       this.slotForm.markAllAsTouched();
       return;
@@ -273,6 +288,8 @@ export class ProfileComponent extends BaseComponent implements OnInit {
     })
 
   }
+
+
 
   get currentMonthLabel(): string {
     return this.currentMonth.toLocaleDateString('en-US', 

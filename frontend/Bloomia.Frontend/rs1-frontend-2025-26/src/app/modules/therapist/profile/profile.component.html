@@ -302,10 +302,12 @@
                                  mat-raised-button 
                                  type="submit"
                                  class="primary-btn"
-                                 [disabled]="slotForm.invalid">
+                                 [disabled]="slotForm.invalid || isPastTime()">
                                  <mat-icon>add</mat-icon>
                                     Add slot
                                 </button>
+
+                                <mat-error *ngIf="isPastTime()">You cannot select a time that has already passed.</mat-error>
 
                         </form>
                     </div>
