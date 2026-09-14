@@ -36,7 +36,14 @@ namespace Bloomia.Application.Modules.Therapists.Queries.GetById
                 Description = therapist.Description,
                 RatingAvg = therapist.RatingAvg,
                 IsVerified = therapist.IsVerified,
-                DocumentName = therapist.Document.DocumentType.ToString(),
+                Documents = therapist.Documents
+                .Select(d => new TherapistDocumentDto
+                {
+                    Id = d.Id,
+                    DocumentType = d.DocumentType.ToString(),
+                    FileName = d.FileName,
+                    FilePath = d.FilePath
+                }).ToList(),
                 TherapyTypes = therapist.MyTherapyTypesList
                             .Select(tt => new TherapyTypeDto
                             {
