@@ -20,8 +20,7 @@ namespace Bloomia.Domain.Entities
         public string Description { get; set; }
         public float RatingAvg { get; set; }
         public bool IsVerified { get; set; }
-        public int DocumentId { get; set; }
-        public DocumentEntity Document { get; set; }
+        public List<DocumentEntity> Documents { get; set; } = new ();
 
         public List<TherapistsTherapyTypesEntity> MyTherapyTypesList { get; set; } = new List<TherapistsTherapyTypesEntity>();
         public List<TherapistAvailabilityEntity> Availability { get; set; } = new List<TherapistAvailabilityEntity>();
