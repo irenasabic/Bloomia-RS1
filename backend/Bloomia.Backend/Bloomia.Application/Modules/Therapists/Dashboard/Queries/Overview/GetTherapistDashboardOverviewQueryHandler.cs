@@ -60,6 +60,11 @@ namespace Bloomia.Application.Modules.Therapists.Dashboard.Queries.Overview
                     SessionType = x.SessionType
                 }).ToListAsync(ct);
 
+            foreach(var appointment in upcomingAppointments)
+            {
+                appointment.ScheduledAtUtc = DateTime.SpecifyKind(appointment.ScheduledAtUtc, DateTimeKind.Utc);
+            }
+
             return new TherapistDashboardOverviewDto
             {
                 AppointmentsThisMonth = appointmentsThisMonth,
