@@ -12,10 +12,14 @@ import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {CustomTranslateLoader} from './core/services/custom-translate-loader';
 import {materialModules} from './modules/shared/material-modules';
 import {SharedModule} from './modules/shared/shared-module';
+import { AdminLayoutComponent } from './modules/admin/admin-layout/admin-layout/admin-layout.component';
+import { NotificationLogsComponent } from './modules/admin/admin-layout/notification-logs/notification-logs/notification-logs.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    AdminLayoutComponent,
+    NotificationLogsComponent
   ],
   imports: [
     BrowserModule,
