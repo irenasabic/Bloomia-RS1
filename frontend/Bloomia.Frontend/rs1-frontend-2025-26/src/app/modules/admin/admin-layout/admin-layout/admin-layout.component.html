@@ -10,13 +10,33 @@
     </a>
   </nav>
 
-  <div class="admin-profile">
+  <div class="admin-profile" [matMenuTriggerFor]="userMenu">
+
     <div class="avatar">
       A
     </div>
 
     <span>Admin</span>
+
+    <mat-icon>
+      keyboard_arrow_down
+    </mat-icon>
+
   </div>
+
+  <mat-menu #userMenu="matMenu">
+
+    <button
+      mat-menu-item
+      (click)="onLogout()">
+
+      <mat-icon>logout</mat-icon>
+
+      <span>Logout</span>
+
+    </button>
+
+  </mat-menu>
 
 </header>
 

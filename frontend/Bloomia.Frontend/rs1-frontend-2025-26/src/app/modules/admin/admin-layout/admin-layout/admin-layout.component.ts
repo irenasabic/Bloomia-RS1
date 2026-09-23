@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin-layout',
@@ -7,5 +8,9 @@ import { Component } from '@angular/core';
   styleUrl: './admin-layout.component.scss',
 })
 export class AdminLayoutComponent {
-
+  private router = inject(Router);
+  
+  onLogout(): void {
+    this.router.navigate(['/logout']);
+  }
 }
