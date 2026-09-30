@@ -142,6 +142,15 @@ export class DirectChatsDetailsComponent implements OnInit{
       }
     })
   }
+
+  markChatAsRead(directChatId: number): void {
+    this.apiService.markChatAsRead(directChatId).subscribe({
+      error: (err) => {
+        console.error('Failed to mark chat as read', err);
+      }
+    });
+  }
+
   getDirectChatDetails(id:number){
     this.isLoading=true;
     this.apiService.getTherapistChatById(id).subscribe({
@@ -154,6 +163,8 @@ export class DirectChatsDetailsComponent implements OnInit{
           console.info(res);
            
           await this.chatRealtimeService.joinDirectChatGroup(res.directChatId);
+        
+          this.markChatAsRead(id);
       },
       error:(err)=>{
         this.errorMessage="SOMETHING WENT WRONG WITH CHAT";
