@@ -38,6 +38,7 @@ namespace Bloomia.Infrastructure.Services
 
             worksheet.Cell("A8").Value = "Average rating";
             worksheet.Cell("B8").Value = data.Business.AverageRating;
+            worksheet.Cell("B8").Style.NumberFormat.Format = "0.0";
 
             worksheet.Cell("A10").Value = "Users";
             worksheet.Cell("A10").Style.Font.Bold = true;
@@ -66,8 +67,8 @@ namespace Bloomia.Infrastructure.Services
             worksheet.Cell("B18").Value = data.SystemPerformance.TotalRequests;
 
             worksheet.Cell("A19").Value = "Average response time";
-            worksheet.Cell("B19").Value =
-                data.SystemPerformance.AverageResponseTimeMs;
+            worksheet.Cell("B19").Value = data.SystemPerformance.AverageResponseTimeMs;
+            worksheet.Cell("B19").Style.NumberFormat.Format = "0.0";
 
             worksheet.Cell("C19").Value = "ms";
 
@@ -76,8 +77,8 @@ namespace Bloomia.Infrastructure.Services
                 data.SystemPerformance.ServerErrorsCount;
 
             worksheet.Cell("A21").Value = "Error rate";
-            worksheet.Cell("B21").Value =
-                data.SystemPerformance.ErrorRate;
+            worksheet.Cell("B21").Value = data.SystemPerformance.ErrorRate;
+            worksheet.Cell("B21").Style.NumberFormat.Format = "0.00";
 
             worksheet.Cell("C21").Value = "%";
 
