@@ -28,7 +28,7 @@ namespace Bloomia.Infrastructure.Database.Configurations
               .HasForeignKey(x => x.AppointmentId)
               .OnDelete(DeleteBehavior.NoAction);
 
-            //added unique index with filter IsDeleted=0,  da mozemo adresirati ponovo termin koji je oslobodjen nakon otkazivanja
+            // Added a unique index with the IsDeleted=0 filter so a released time slot can be reused after cancellation.
             builder.HasIndex(x => x.TherapistAvailabilityId)
                     .IsUnique()
                     .HasFilter("[IsDeleted]=0");
