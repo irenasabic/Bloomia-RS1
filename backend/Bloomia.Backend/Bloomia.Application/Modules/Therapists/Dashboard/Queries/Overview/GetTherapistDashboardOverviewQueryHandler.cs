@@ -14,14 +14,14 @@ namespace Bloomia.Application.Modules.Therapists.Dashboard.Queries.Overview
             var userId = currentUser.UserId;
 
             if (userId is null)
-                throw new BloomiaBusinessRuleException("AUTH", "Korisnik nije autentifikovan.");
+                throw new BloomiaBusinessRuleException("AUTH", "User is not authenticated.");
 
             var therapistId = await ctx.Therapists
                .Where(x => x.UserId == userId)
                .Select(x => (int?)x.Id).FirstOrDefaultAsync(ct);
 
             if (therapistId is null)
-                throw new BloomiaBusinessRuleException("THERAPIST", "Terapeut nije pronadjen.");
+                throw new BloomiaBusinessRuleException("THERAPIST", "Therapist was not found.");
 
             var now = DateTime.UtcNow;
 
