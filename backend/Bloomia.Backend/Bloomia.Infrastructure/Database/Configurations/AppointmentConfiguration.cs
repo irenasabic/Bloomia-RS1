@@ -28,15 +28,16 @@ namespace Bloomia.Infrastructure.Database.Configurations
               .HasForeignKey(x => x.AppointmentId)
               .OnDelete(DeleteBehavior.NoAction);
 
-            // Added a unique index with the IsDeleted=0 filter so a released time slot can be reused after cancellation.
+            // A slot can hold only one active appointment. Cancelled (Status = 1) and deleted rows
+            // are excluded from the index so a released time slot can be booked again.
             builder.HasIndex(x => x.TherapistAvailabilityId)
                     .IsUnique()
-                    .HasFilter("[IsDeleted]=0");
+                    .HasFilter("[IsDeleted]=0 AND [Status]<>1");
 
 
             builder.HasOne(x => x.TherapistAvailability)
-                .WithOne(x => x.Appointment)
-                .HasForeignKey<AppointmentEntity>(x => x.TherapistAvailabilityId)
+                .WithMany(x => x.Appointments)
+                .HasForeignKey(x => x.TherapistAvailabilityId)
                 .IsRequired(false)
                 .OnDelete(DeleteBehavior.NoAction);
 
